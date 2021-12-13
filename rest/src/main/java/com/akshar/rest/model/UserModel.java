@@ -1,0 +1,120 @@
+package com.akshar.rest.model;
+
+import com.akshar.rest.entities.Address;
+import com.akshar.rest.entities.User;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class UserModel {
+
+    private Long id;
+    private String username;
+    private String email;
+    private Date time;
+    private String password;
+    private Boolean isAdmin;
+    private Boolean status;
+    private List<AddressModel> address;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<AddressModel> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<AddressModel> address) {
+        this.address = address;
+    }
+
+    public User createEntity(){
+        User user = new User();
+        user.setUsername(this.username);
+        user.setAdmin(this.isAdmin);
+        user.setTime(this.getTime());
+        user.setEmail(this.email);
+        user.setPassword(this.password);
+
+        List<Address> addresses = new ArrayList<>();
+        for(AddressModel am : this.address){
+            Address a = new Address();
+            a.setLine1(am.getLine1());
+            a.setLine2(am.getLine2());
+            a.setCity(am.getCity());
+            a.setCountry(am.getCountry());
+            a.setPincode(am.getPincode());
+            addresses.add(a);
+        }
+        user.setAddress(addresses);
+        return user;
+    }
+
+    public static UserModel createEntity(User user){
+        UserModel model = new UserModel();
+        model.setUsername(user.getUsername());
+        model.setIsAdmin(user.getAdmin());
+        model.setTime(user.getTime());
+        model.setEmail(user.getEmail());
+        model.setPassword(user.getPassword());
+        return model;
+    }
+}
