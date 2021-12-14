@@ -2,6 +2,7 @@ package com.akshar.rest.model;
 
 import com.akshar.rest.entities.Address;
 import com.akshar.rest.entities.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -86,13 +87,13 @@ public class UserModel {
         this.address = address;
     }
 
-    public User createEntity(){
+    public User createModel(){
         User user = new User();
         user.setUsername(this.username);
         user.setAdmin(this.isAdmin);
         user.setTime(this.getTime());
         user.setEmail(this.email);
-        user.setPassword(this.password);
+        user.setPassword(new BCryptPasswordEncoder().encode(this.password));
 
         List<Address> addresses = new ArrayList<>();
         for(AddressModel am : this.address){
@@ -108,13 +109,25 @@ public class UserModel {
         return user;
     }
 
-    public static UserModel createEntity(User user){
+    public static UserModel createModel(User user){
         UserModel model = new UserModel();
         model.setUsername(user.getUsername());
         model.setIsAdmin(user.getAdmin());
         model.setTime(user.getTime());
         model.setEmail(user.getEmail());
         model.setPassword(user.getPassword());
+
+        List<AddressModel> addresses = new ArrayList<>();
+        for(Address a : user.getAddress()){
+            AddressModel am = new AddressModel();
+            am.setLine1(a.getLine1());
+            am.setLine2(a.getLine2());
+            am.setCity(a.getCity());
+            am.setCountry(a.getCountry());
+            am.setPincode(a.getPincode());
+            addresses.add(am);
+        }
+        model.setAddress(addresses);
         return model;
     }
 }
