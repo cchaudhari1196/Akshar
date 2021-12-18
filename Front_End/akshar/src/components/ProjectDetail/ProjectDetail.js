@@ -7,7 +7,7 @@ import axios from "axios";
 import pdf from "../../Assets/Soumyajit-Behera.pdf";
 import { AiOutlineDownload } from "react-icons/ai";
 
-function Resume() {
+function ProjectDetail() {
   const uri = "https://porfolio-backend.vercel.app/ranks/getRanks";
   const [spojRank, upadteSpojRank] = useState(0);
   const [hackerrank, upadteHackerank] = useState(0);
@@ -99,4 +99,4 @@ function Resume() {
   );
 }
 
-export default Resume;
+export default ProjectDetail;

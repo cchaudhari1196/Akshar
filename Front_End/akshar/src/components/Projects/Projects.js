@@ -112,7 +112,7 @@ function Projects() {
                     id={project.id}
                     name={project.projectName}
                     desc={project.projectDesc}
-                    tags={project.tags}
+                    owner={project.owner}
                     code={project.code}
                     demo={project.demo}
                     image={project.image}
