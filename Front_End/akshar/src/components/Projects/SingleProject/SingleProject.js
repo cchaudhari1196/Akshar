@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { FaPlay, FaCode } from "react-icons/fa";
 import Fade from "react-reveal/Fade";
+import { useHistory } from "react-router-dom";
 
 import placeholder from "../../../Assets/png/placeholder.png";
 import "./SingleProject.css";
@@ -33,6 +34,7 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
   }));
 
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Fade bottom>
@@ -40,6 +42,9 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
         key={id}
         className="singleProject"
         style={{ backgroundColor: "rgb(199 112 240)" }}
+        onClick={() => {
+          history.push(`/project/${id}`);
+        }}
       >
         <div className="projectContent">
           <h2 style={{ color: theme.tertiary }}>{name}</h2>

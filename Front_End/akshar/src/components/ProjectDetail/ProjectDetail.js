@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Particle from "../Particle";
-import Resumecontent from "./ResumeContent";
+import ProjectContentFormat from "./ProjectContentFormat";
 import axios from "axios";
 import pdf from "../../Assets/Soumyajit-Behera.pdf";
 import { AiOutlineDownload } from "react-icons/ai";
+import "react-slideshow-image/dist/styles.css";
+import ControlledCarousel from "./carousel";
+import Contacts from "../Contacts/Contacts.js";
 
 function ProjectDetail() {
   const uri = "https://porfolio-backend.vercel.app/ranks/getRanks";
@@ -28,73 +31,71 @@ function ProjectDetail() {
       });
   }, []);
 
+  const carouselData = [
+    {
+      id: 1,
+      url: "https://cdn.pixabay.com/photo/2017/06/01/22/42/chain-2364830__340.jpg",
+      name: "abstarctImage",
+      header: "Look at the chain",
+      subHeader: "Its lloking like someone got eyes oon that thing.",
+    },
+    {
+      id: 2,
+      url: "https://cdn.pixabay.com/photo/2016/02/28/12/55/boy-1226964__340.jpg",
+      name: "boyImage",
+      header: "Boy looking cute",
+      subHeader:
+        "Its a image of boy who is waitng for his father to come home.",
+    },
+    {
+      id: 3,
+      url: "https://cdn.pixabay.com/photo/2016/08/12/14/25/abstract-1588720__340.jpg",
+      name: "virus",
+      header: "OMG! its that virus",
+      subHeader: "Virus has made world to beg for mercy.",
+    },
+    {
+      id: 4,
+      url: "https://cdn.pixabay.com/photo/2016/11/30/20/44/computer-1873831__340.png",
+      name: "Code",
+      header: "Future in progress",
+      subHeader: "Coding is very interesting field of work.",
+    },
+  ];
+
   return (
     <Container fluid className="resume-section">
       <Particle />
       <Container>
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Button variant="primary" href={pdf} target="_blank">
-            <AiOutlineDownload />
-            &nbsp;Download CV
-          </Button>
-        </Row>
+        <h1 className="project-heading">
+          <strong className="purple">Works </strong>
+        </h1>
+        <p style={{ color: "white" }}>Its owned by .</p>
+        <ControlledCarousel data={carouselData}></ControlledCarousel>
         <Row className="resume">
-          <Col md={6} className="resume-left">
-            <h3 className="resume-title">Experience</h3>
-            <Resumecontent
-              title="Frontend Developer Intern [Flash Tech]"
+          <Col md={12} className="resume-left">
+            <h3 className="resume-title">Owner</h3>
+            <ProjectContentFormat title="Amdocs Development center" />
+
+            <h3 className="resume-title">Highlights</h3>
+            <ProjectContentFormat
+              title="Installations"
               date="July 2021 - September 2021"
               content={[
-                "Worked on the development of an E-commerce website",
-                "Redesigned Wigme.com and created features to enhance the user experience and optimized designs for smartphones.",
-                " Translated designs and wireframes into a highly responsive user interface and reusable components using React.js.",
-                "Used Back-End APIs to display data using the Custom Components, library Components, and Redux.",
-                "Used JIRA as the bug tracking system to track and maintain the history of bugs/issues on an everyday basis.",
-              ]}
-            />
-            <h3 className="resume-title">Extracurricular Activities</h3>
-            <Resumecontent
-              title="Web Developer [Pantheon-2019 Technical Fest of BIT Mesra]"
-              content={[
-                "Worked on building front-end UI design using HTML5, CSS3, JavaScript jQuery, and building API routes using Node and express.js.",
-              ]}
-            />
-          </Col>
-          <Col md={6} className="resume-right">
-            <h3 className="resume-title">Education</h3>
-            <Resumecontent
-              title="IMSC MATHS AND COMPUTING [BIT Mesra, Ranchi] "
-              date="2018 - Present"
-              content={[`CGPA: ${cgpa} (Till ${sem}th Sem)`]}
-            />
-
-            <h3 className="resume-title">Publications</h3>
-            <Resumecontent
-              title=""
-              content={[
-                "Article entitled An Overlapping Sliding Window and Combined Feature based Emotion Recognition System for EEG Signals publised in Emerald Publication;10.1108/ACI-05-2021-0130",
-              ]}
-            />
-
-            <h3 className="resume-title">Ranks and Achivements</h3>
-            <Resumecontent
-              title=""
-              content={[
-                `Current rank in Spoj ${spojRank}`,
-                `Current rank in HackerRank  ${hackerrank}`,
-                "Top Performer in Code-Break 1.0",
-                "Participant in Hack-A-Bit 2019",
+                "Installed 2 pool DP",
+                "Installed Generation plant for temp use",
+                "Installed Solar rooftop plant",
               ]}
             />
           </Col>
         </Row>
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Button variant="primary" href={pdf} target="_blank">
-            <AiOutlineDownload />
-            &nbsp;Download CV
-          </Button>
-        </Row>
+        <h1 className="project-heading">
+          <strong className="purple">Contact Us </strong>
+        </h1>
+        <p style={{ color: "white" }}>Have a similar Project in Mind?</p>
       </Container>
+
+      <Contacts></Contacts>
     </Container>
   );
 }

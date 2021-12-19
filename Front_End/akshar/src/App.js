@@ -12,6 +12,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ScrollToTop from "./components/ScrollToTop";
+import Contacts from "./components/Contacts/Contacts";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -34,7 +35,8 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route exact path="/project" component={Projects} />
           <Route path="/about" component={About} />
-          <Route path="/project/{id}" component={ProjectDetail} />
+          <Route path="/project/:id" component={ProjectDetail} />
+          <Route path="/contact" component={Contacts} />
         </Switch>
         <Footer />
       </div>

@@ -15,6 +15,7 @@ import { Grid } from "@material-ui/core";
 
 import { Container, Row, Col } from "react-bootstrap";
 import Particle from "../Particle";
+import ProjectDetail from "../ProjectDetail/ProjectDetail";
 
 function Projects() {
   const [search, setSearch] = useState("");
@@ -115,7 +116,7 @@ function Projects() {
                     owner={project.owner}
                     code={project.code}
                     demo={project.demo}
-                    image={project.image}
+                    image={project.image[0].url}
                   />
                 ))}
               </Grid>

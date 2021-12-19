@@ -7,6 +7,37 @@ import six from "../svg/projects/six.svg";
 import seven from "../svg/projects/seven.svg";
 import eight from "../logo.png";
 
+const carouselDataProjectOne = [
+  {
+    id: 1,
+    url: "https://cdn.pixabay.com/photo/2017/06/01/22/42/chain-2364830__340.jpg",
+    name: "abstarctImage",
+    header: "Look at the chain",
+    subHeader: "Its lloking like someone got eyes oon that thing.",
+  },
+  {
+    id: 2,
+    url: "https://cdn.pixabay.com/photo/2016/02/28/12/55/boy-1226964__340.jpg",
+    name: "boyImage",
+    header: "Boy looking cute",
+    subHeader: "Its a image of boy who is waitng for his father to come home.",
+  },
+  {
+    id: 3,
+    url: "https://cdn.pixabay.com/photo/2016/08/12/14/25/abstract-1588720__340.jpg",
+    name: "virus",
+    header: "OMG! its that virus",
+    subHeader: "Virus has made world to beg for mercy.",
+  },
+  {
+    id: 4,
+    url: "https://cdn.pixabay.com/photo/2016/11/30/20/44/computer-1873831__340.png",
+    name: "Code",
+    header: "Future in progress",
+    subHeader: "Coding is very interesting field of work.",
+  },
+];
+
 export const projectsData = [
   {
     id: 1,
@@ -16,7 +47,7 @@ export const projectsData = [
     owner: ["Infosys"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: one,
+    image: carouselDataProjectOne,
   },
   {
     id: 2,
@@ -26,7 +57,7 @@ export const projectsData = [
     owner: ["TCS", "Infosys"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: two,
+    image: carouselDataProjectOne,
   },
   {
     id: 3,
@@ -36,7 +67,7 @@ export const projectsData = [
     owner: ["SmartOne", "PES"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: three,
+    image: carouselDataProjectOne,
   },
   {
     id: 4,
@@ -46,7 +77,7 @@ export const projectsData = [
     owner: ["Akshar", "NG"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: four,
+    image: carouselDataProjectOne,
   },
   {
     id: 5,
@@ -55,7 +86,7 @@ export const projectsData = [
     owner: ["Swami Electricals and Electronics", "Swami Computers"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: five,
+    image: carouselDataProjectOne,
   },
   {
     id: 6,
@@ -64,7 +95,7 @@ export const projectsData = [
     owner: ["Flutter"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: six,
+    image: carouselDataProjectOne,
   },
   {
     id: 7,
@@ -73,7 +104,7 @@ export const projectsData = [
     owner: ["React", "Redux", "Bootstrap"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: seven,
+    image: carouselDataProjectOne,
   },
   {
     id: 8,
@@ -83,21 +114,6 @@ export const projectsData = [
     owner: ["Flutter", "React"],
     code: "https://github.com/hhhrrrttt222111/developer-portfolio",
     demo: "https://github.com/hhhrrrttt222111/developer-portfolio",
-    image: eight,
+    image: carouselDataProjectOne,
   },
 ];
-
-// Do not remove any fields.
-// Leave it blank instead as shown below
-
-/* 
-{
-    id: 1,
-    projectName: 'Car Pooling System',
-    projectDesc: '',
-    owner: ['Flutter', 'React'],
-    code: '',
-    demo: '',
-    image: ''
-}, 
-*/

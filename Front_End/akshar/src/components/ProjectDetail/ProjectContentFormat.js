@@ -1,6 +1,6 @@
 import React from "react";
 
-function ResumeContent(props) {
+function ProjectContentFormat(props) {
   return (
     <div className="resume-item">
       <h5 className={props.title ? "resume-title" : "resume-no-title"}>
@@ -10,12 +10,14 @@ function ResumeContent(props) {
         <em>{props.date}</em>
       </p>
       <ul>
-        {props.content.map((value, index) => (
-          <li key={index}> ‣ {value}</li>
-        ))}
+        {props.content ? (
+          props.content.map((value, index) => <li key={index}> ‣ {value}</li>)
+        ) : (
+          <p></p>
+        )}
       </ul>
     </div>
   );
 }
 
-export default ResumeContent;
+export default ProjectContentFormat;
