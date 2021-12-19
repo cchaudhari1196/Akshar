@@ -1,21 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { projectsData } from "../../Assets/data/projectsData";
-import { headerData } from "../../Assets/data/headerData";
-// import { HiArrowRight } from "react-icons/hi";
-import { Helmet } from "react-helmet";
 import "./Projects.css";
 import SingleProject from "./SingleProject/SingleProject";
 
-import { AiOutlineHome } from "react-icons/ai";
 import { Grid } from "@material-ui/core";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Particle from "../Particle";
-import ProjectDetail from "../ProjectDetail/ProjectDetail";
 
 function Projects() {
   const [search, setSearch] = useState("");

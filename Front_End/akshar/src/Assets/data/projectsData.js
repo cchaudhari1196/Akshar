@@ -7,7 +7,7 @@ import six from "../svg/projects/six.svg";
 import seven from "../svg/projects/seven.svg";
 import eight from "../logo.png";
 
-const carouselDataProjectOne = [
+export const carouselDataProjectOne = [
   {
     id: 1,
     url: "https://cdn.pixabay.com/photo/2017/06/01/22/42/chain-2364830__340.jpg",
