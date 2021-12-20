@@ -72,10 +72,11 @@ html {
 /* Navbar Section  */
 /* --------- */
 .sticky {
-  background-color: #212038d8 !important;
+  background-color: #010001 !important;
   transition: all 0.3s ease-out 0s !important;
   box-shadow: 0px 10px 10px 0px rgba(9, 5, 29, 0.171) !important;
-  backdrop-filter: blur(15px) !important;
+  backdrop-filter: opacity(1000px) !important;
+  /* backdrop-filter: blur(15px) !important; */
 }
 
 .navbar {
@@ -83,6 +84,7 @@ html {
   transition: all 0.3s ease-out 0s !important;
   padding: 0.3rem 2rem !important;
   font-size: 1.2rem !important;
+  max-height: 4rem;
 }
 
 .navbar-toggler {
@@ -152,8 +154,9 @@ html {
 }
 
 .logo {
-  height: 1.4em !important;
-  width: 2.5em !important;
+  margin-top: 2rem;
+  height: 5.4em !important;
+  width: 5.5em !important;
 }
 
 .navbar-nav .nav-link {

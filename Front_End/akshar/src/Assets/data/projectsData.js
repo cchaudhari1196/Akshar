@@ -1,12 +1,3 @@
-import one from "../svg/projects/one.svg";
-import two from "../svg/projects/two.svg";
-import three from "../svg/projects/three.svg";
-import four from "../svg/projects/four.svg";
-import five from "../svg/projects/five.svg";
-import six from "../svg/projects/six.svg";
-import seven from "../svg/projects/seven.svg";
-import eight from "../logo.png";
-
 export const carouselDataProjectOne = [
   {
     id: 1,

@@ -1,4 +1,4 @@
-import React, { Component, setState } from "react";
+import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 
 import { testimonialsData } from "./../../Assets/data/testimonialsData";

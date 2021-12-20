@@ -2,12 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import myImg from "../../Assets/avatar.svg";
 import Tilt from "react-parallax-tilt";
-import {
-  AiFillGithub,
-  AiOutlineTwitter,
-  AiFillInstagram,
-  AiFillMail
-} from "react-icons/ai";
+import { AiOutlineTwitter, AiFillInstagram } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 
 function Home2() {
@@ -20,9 +15,11 @@ function Home2() {
               LET ME <span className="purple"> INTRODUCE </span> OURSELF
             </h1>
             <p className="home-about-body">
-              We are Organization with over 30 years of experience in the Electrical Industry.
+              We are Organization with over 30 years of experience in the
+              Electrical Industry.
               <br />
-              <br />We are headed by Lohar and family.
+              <br />
+              We are headed by Lohar and family.
               <i>
                 <b className="purple"> Lohar and family. </b>
               </i>
@@ -30,10 +27,10 @@ function Home2() {
               <br />
               We provides services in the fields such as &nbsp;
               <i>
-                <b className="purple"> Distribution, Transmission  </b> and
-                also in areas related to{" "}
+                <b className="purple"> Distribution, Transmission </b> and also
+                in areas related to{" "}
                 <b className="purple">
-                Industrial/Commertial/Residential Electrification.
+                  Industrial/Commertial/Residential Electrification.
                 </b>
               </i>
               <br />
@@ -85,7 +82,7 @@ function Home2() {
                   <AiOutlineTwitter />
                 </a>
               </li>
-              
+
               <li className="social-icons">
                 <a
                   href="https://www.linkedin.com/in/chirag-chaudhari-5a8252145"

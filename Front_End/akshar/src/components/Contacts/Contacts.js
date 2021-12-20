@@ -7,15 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   FaTwitter,
   FaLinkedinIn,
-  FaGithub,
   FaYoutube,
-  FaBloggerB,
-  FaRedditAlien,
-  FaStackOverflow,
-  FaCodepen,
   FaInstagram,
-  FaGitlab,
-  FaMediumM,
 } from "react-icons/fa";
 import { AiOutlineSend, AiOutlineCheckCircle } from "react-icons/ai";
 import { FiPhone, FiAtSign } from "react-icons/fi";
@@ -25,7 +18,6 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 
 import { socialsData } from "../../Assets/data/socialsData";
 import { contactsData } from "../../Assets/data/contactsData";
-import { Container } from "react-bootstrap";
 import "./Contacts.css";
 
 function Contacts() {

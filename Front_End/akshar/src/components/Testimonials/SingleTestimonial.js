@@ -1,16 +1,10 @@
-import React, { useContext, useRef } from "react";
-
-import Slider from "react-slick";
-
-import { FaQuoteLeft, FaArrowRight, FaArrowLeft } from "react-icons/fa";
-
+import React, { useContext } from "react";
+import { FaQuoteLeft } from "react-icons/fa";
 import { ThemeContext } from "../../contexts/ThemeContext";
-
 import "./Testimonials.css";
 
 function SingleTestimonial({ id, title, text, image, name }) {
   const { theme } = useContext(ThemeContext);
-  const sliderRef = useRef();
 
   return (
     <>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Particle from "../Particle";
 import ProjectContentFormat from "./ProjectContentFormat";
-import axios from "axios";
 import ControlledCarousel from "./carousel";
 import Contacts from "../Contacts/Contacts.js";
 import Testimonial from "./../Testimonials/Testimonial";
