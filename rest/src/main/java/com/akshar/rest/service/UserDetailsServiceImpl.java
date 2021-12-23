@@ -3,6 +3,8 @@ package com.akshar.rest.service;
 import com.akshar.rest.entities.User;
 import com.akshar.rest.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService    {
 
     @Autowired
     private UserRepository userRepository;
@@ -29,10 +31,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private Collection<GrantedAuthority> getGrantedAuthority(User user){
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-            if(user.getAdmin()){
-                    authorities.add(new SimpleGrantedAuthority("ADMIN_ROLE"));
-            }
-            authorities.add(new SimpleGrantedAuthority("USER_ROLE"));
+//            if(user.getAdmin()){
+//                    authorities.add(new SimpleGrantedAuthority("ADMIN_ROLE"));
+//            }
+//            authorities.add(new SimpleGrantedAuthority("USER_ROLE"));
             return authorities;
     }
 }

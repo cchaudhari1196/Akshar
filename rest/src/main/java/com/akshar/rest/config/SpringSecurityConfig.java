@@ -15,7 +15,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AuthenticationEntryPoint entryPoint;
+    private AuthenticationEntryPointConfig entryPoint;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
@@ -26,6 +26,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic().authenticationEntryPoint(entryPoint);
+//        http.csrf().disable().authorizeRequests()
+//                .antMatchers("/admin")
+//                .access("@userAuthorizationControl.checkAccessBasedOnRole(authentication)")
+//                .anyRequest().authenticated().and().httpBasic().authenticationEntryPoint(entryPoint);
+
+            http.authorizeRequests().
+                    antMatchers("/admin").hasRole("ADMIN").
+                    antMatchers("/api/v1/students", "/api/v1/courses").hasAnyRole("USER", "ADMIN").
+                    antMatchers("/", "static/css", "static/js").
+                    permitAll().
+                    and().
+                    formLogin();
+
     }
 }
