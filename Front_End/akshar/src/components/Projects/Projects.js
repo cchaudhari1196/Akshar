@@ -74,7 +74,6 @@ function Projects() {
   return (
     <div className="projectPage" style={{ backgroundColor: theme.secondary }}>
       <Container fluid className="project-section">
-        <Particle />
         <Container>
           <h1 className="project-heading">
             Our Recent <strong className="purple">Works </strong>

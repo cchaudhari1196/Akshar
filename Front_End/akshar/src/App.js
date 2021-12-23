@@ -13,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import ScrollToTop from "./components/ScrollToTop";
 import Contacts from "./components/Contacts/Contacts";
+import Login from "./components/Login/login";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -37,6 +38,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/project/:id" component={ProjectDetail} />
           <Route path="/contact" component={Contacts} />
+          <Route path="/login" component={Login} />
         </Switch>
         <Footer />
       </div>

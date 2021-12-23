@@ -40,7 +40,6 @@ function ProjectDetail(props) {
           </strong>
         </h1>
         <p style={{ color: "white" }}>Its owned by {generateOwnerString}</p>
-
         <ControlledCarousel data={carouselData}></ControlledCarousel>
         <Row className="resume">
           <Col md={12} className="resume-left">

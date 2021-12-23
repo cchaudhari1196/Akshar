@@ -5,21 +5,10 @@ import { testimonialsData } from "./../../Assets/data/testimonialsData";
 import SingleTestimonial from "./SingleTestimonial";
 
 class Testimonial extends React.Component {
-  states = {
-    index: 0,
-  };
-  handleSelect = (selectedIndex, e) => {
-    this.setState({ index: this.states.index++ });
-  };
-
   render() {
     return (
       <div>
-        <Carousel
-          activeIndex={this.states.index}
-          onSelect={this.handleSelect}
-          interval={1500}
-        >
+        <Carousel interval={1500}>
           {testimonialsData.map(({ id, title, text, image, name }) => (
             <Carousel.Item key={id}>
               <SingleTestimonial

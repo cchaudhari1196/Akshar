@@ -8,11 +8,23 @@ function ControlledCarousel({ data }) {
     setIndex(selectedIndex);
   };
 
+  const PictureSizer = (img) => {
+    return (
+      <img
+        // maxWidth={"100%"}
+        // maxHeight={"500px"}
+        src={img}
+        alt="Type something descriptive"
+      />
+    );
+  };
+
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} interval={2000}>
       {data.map((item, index) => (
         <Carousel.Item key={index}>
           <img className="d-block w-100" src={item.url} alt="{item.name}" />
+          {/* {PictureSizer(item.url)} */}
           <Carousel.Caption>
             <h3>{item.header}</h3>
             <p>{item.subHeader}</p>
