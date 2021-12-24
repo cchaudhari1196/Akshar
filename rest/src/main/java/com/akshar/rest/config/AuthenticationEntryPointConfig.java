@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+/*This class will handle cases of failure of auth*/
 @Component
 public class AuthenticationEntryPointConfig extends BasicAuthenticationEntryPoint {
     @Override
