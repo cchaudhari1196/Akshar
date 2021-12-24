@@ -15,6 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/*
+* @author chirag
+* UserDetailsService: This interface is commonly implemented if we have user/customer table in DB.
+*                       this interface has loadUserByUserName: Inside which we specify logic to fetch user.
+*
+* */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService    {
 
@@ -31,10 +37,10 @@ public class UserDetailsServiceImpl implements UserDetailsService    {
 
     private Collection<GrantedAuthority> getGrantedAuthority(User user){
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-//            if(user.getAdmin()){
-//                    authorities.add(new SimpleGrantedAuthority("ADMIN_ROLE"));
-//            }
-//            authorities.add(new SimpleGrantedAuthority("USER_ROLE"));
+            if(user.getAdmin()){
+                    authorities.add(new SimpleGrantedAuthority("ADMIN_ROLE"));
+            }
+            authorities.add(new SimpleGrantedAuthority("USER_ROLE"));
             return authorities;
     }
 }

@@ -26,6 +26,11 @@ public class UserController {
         return new ResponseEntity(userService.getUserByEmail(email), HttpStatus.OK);
     }
 
+    @GetMapping("/contact")
+    public ResponseEntity contact(){
+        return new ResponseEntity("You can Contact me at 8830703113", HttpStatus.OK);
+    }
+
     @GetMapping("/encodePassword/{email}")
     public ResponseEntity encodePassword(@PathVariable(value = "email") String email){
         return new ResponseEntity(userService.encodePasswords(email), HttpStatus.OK);
