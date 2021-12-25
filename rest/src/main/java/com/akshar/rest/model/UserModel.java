@@ -1,16 +1,10 @@
 package com.akshar.rest.model;
 
 import com.akshar.rest.entities.Address;
+import com.akshar.rest.entities.Role;
 import com.akshar.rest.entities.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class UserModel {
 
@@ -19,7 +13,6 @@ public class UserModel {
     private String email;
     private Date time;
     private String password;
-    private Boolean isAdmin;
     private Boolean status;
     private List<AddressModel> address;
 
@@ -55,14 +48,6 @@ public class UserModel {
         this.time = time;
     }
 
-    public Boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-    public void setIsAdmin(Boolean admin) {
-        isAdmin = admin;
-    }
-
     public Boolean getStatus() {
         return status;
     }
@@ -90,7 +75,6 @@ public class UserModel {
     public User createModel(){
         User user = new User();
         user.setUsername(this.username);
-        user.setAdmin(this.isAdmin);
         user.setTime(this.getTime());
         user.setEmail(this.email);
         user.setPassword(new BCryptPasswordEncoder().encode(this.password));
@@ -106,13 +90,17 @@ public class UserModel {
             addresses.add(a);
         }
         user.setAddress(addresses);
+
+        Role userRole = new Role();
+        userRole.setName("USER");
+        userRole.setUser(user);
+        user.addRoles(userRole);
         return user;
     }
 
     public static UserModel createModel(User user){
         UserModel model = new UserModel();
         model.setUsername(user.getUsername());
-        model.setIsAdmin(user.getAdmin());
         model.setTime(user.getTime());
         model.setEmail(user.getEmail());
         model.setPassword(user.getPassword());
@@ -128,6 +116,7 @@ public class UserModel {
             addresses.add(am);
         }
         model.setAddress(addresses);
+
         return model;
     }
 }

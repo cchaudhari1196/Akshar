@@ -9,7 +9,7 @@ public class Address {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO  )
+    @GeneratedValue(strategy = GenerationType.IDENTITY  )
     private Long id;
 
     @Column(name = "address_line_1")
@@ -26,9 +26,6 @@ public class Address {
 
     @Column
     private String country;
-
-//    @Column(name = "user_id")
-//    private Long userId;
 
     @Column
     private Boolean status;
@@ -80,14 +77,6 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
-
-//    public Long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Long userId) {
-//        this.userId = userId;
-//    }
 
     public Boolean getStatus() {
         return status;

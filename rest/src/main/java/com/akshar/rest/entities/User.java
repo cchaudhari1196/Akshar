@@ -1,8 +1,12 @@
 package com.akshar.rest.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.mapping.Set;
 
 @Entity
 @Table
@@ -10,7 +14,7 @@ public class User {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -25,12 +29,13 @@ public class User {
     @Column
     private Date time;
 
-    @Column(name = "is_admin")
-    private Boolean isAdmin;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private List<Address> address;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Role> roles = new ArrayList<>();
 
     @Column
     private Boolean status;
@@ -75,14 +80,6 @@ public class User {
         this.time = time;
     }
 
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
-    }
-
     public Boolean getStatus() {
         return status;
     }
@@ -97,5 +94,17 @@ public class User {
 
     public void setAddress(List<Address> address) {
         this.address = address;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRoles(Role role) {
+        this.roles.add(role);
     }
 }

@@ -31,11 +31,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     /*This method will have logic for which endpoint to secure*/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().
-                antMatchers("/user/contact").permitAll()
-                .anyRequest().authenticated()
-                .and().formLogin()
-                .and().httpBasic();
+        http.csrf().disable().authorizeRequests().
+//                antMatchers("/user/contact").permitAll().
+//                antMatchers("/user/create").hasAuthority("ADMIN").
+                anyRequest().authenticated().
+                and().formLogin().
+                and().httpBasic();
 
     }
 }

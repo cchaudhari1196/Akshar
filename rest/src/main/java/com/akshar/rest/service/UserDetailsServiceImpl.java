@@ -1,5 +1,6 @@
 package com.akshar.rest.service;
 
+import com.akshar.rest.entities.Role;
 import com.akshar.rest.entities.User;
 import com.akshar.rest.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,13 @@ public class UserDetailsServiceImpl implements UserDetailsService    {
 
     private Collection<GrantedAuthority> getGrantedAuthority(User user){
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-            if(user.getAdmin()){
-                    authorities.add(new SimpleGrantedAuthority("ADMIN_ROLE"));
+            for(Role role: user.getRoles()){
+                authorities.add(new SimpleGrantedAuthority(role.getName()));
             }
-            authorities.add(new SimpleGrantedAuthority("USER_ROLE"));
+//            if(user.getRoles().contains()){
+//                    authorities.add(new SimpleGrantedAuthority("ADMIN_ROLE"));
+//            }
+//            authorities.add(new SimpleGrantedAuthority("USER_ROLE"));
             return authorities;
     }
 }

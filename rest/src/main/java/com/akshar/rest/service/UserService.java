@@ -1,5 +1,6 @@
 package com.akshar.rest.service;
 
+import com.akshar.rest.model.GiveAuthorityModel;
 import com.akshar.rest.model.LoginModel;
 import com.akshar.rest.model.UserModel;
 
@@ -11,4 +12,6 @@ public interface UserService {
     boolean login(LoginModel loginModel);
 
     boolean encodePasswords(String email);
+
+    boolean giveAuthority(GiveAuthorityModel giveAuthorityModel) throws Exception;
 }

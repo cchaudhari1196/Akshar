@@ -1,6 +1,7 @@
 package com.akshar.rest.controller;
 
 
+import com.akshar.rest.model.GiveAuthorityModel;
 import com.akshar.rest.model.UserModel;
 import com.akshar.rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,16 @@ public class UserController {
     public ResponseEntity create(@RequestBody UserModel userModel){
         userService.createCustomer(userModel);
         return new ResponseEntity("Created", HttpStatus.OK);
+    }
+
+    @PostMapping("/giveAuthority")
+    public ResponseEntity giveAuthority(@RequestBody GiveAuthorityModel giveAuthority){
+        try {
+            userService.giveAuthority(giveAuthority);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity("Authority Given", HttpStatus.OK);
     }
 
     @GetMapping("/byEmail/{email}")
