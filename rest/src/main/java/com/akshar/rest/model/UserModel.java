@@ -100,6 +100,7 @@ public class UserModel {
 
     public static UserModel createModel(User user){
         UserModel model = new UserModel();
+        model.setId(user.getId());
         model.setUsername(user.getUsername());
         model.setTime(user.getTime());
         model.setEmail(user.getEmail());
@@ -108,6 +109,7 @@ public class UserModel {
         List<AddressModel> addresses = new ArrayList<>();
         for(Address a : user.getAddress()){
             AddressModel am = new AddressModel();
+            am.setId(a.getId());
             am.setLine1(a.getLine1());
             am.setLine2(a.getLine2());
             am.setCity(a.getCity());

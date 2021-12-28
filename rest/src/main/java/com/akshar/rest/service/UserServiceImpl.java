@@ -35,6 +35,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserModel getUserByEmail(String email){
         User user = userRepository.findByEmailAddress(email);
+        if (user == null)
+            return null;
         return UserModel.createModel(user);
     }
 
@@ -75,18 +77,4 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
         return true;
     }
-
-//    // Fetches full profile of a specific customer
-//
-//    public CustomerDTO getCustomerProfile(Long phoneNo) {
-//        CustomerDTO custDTO = null;
-//        logger.info("Profile request for customer {}", phoneNo);
-//        Optional<Customer> optCust = userDAO.findById(phoneNo);
-//        if (optCust.isPresent()) {
-//            Customer cust = optCust.get();
-//            custDTO = CustomerDTO.valueOf(cust);
-//        }
-//        logger.info("Profile for customer : {}", custDTO);
-//        return custDTO;
-//    }
 }

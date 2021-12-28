@@ -1,13 +1,17 @@
 package com.akshar.rest.controller;
 
 
+import com.akshar.rest.entities.User;
 import com.akshar.rest.model.GiveAuthorityModel;
 import com.akshar.rest.model.UserModel;
 import com.akshar.rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -32,18 +36,15 @@ public class UserController {
         return new ResponseEntity("Authority Given", HttpStatus.OK);
     }
 
-    @GetMapping("/byEmail/{email}")
+    @GetMapping("/{email}")
     public ResponseEntity getByMail(@PathVariable(value = "email") String email){
         return new ResponseEntity(userService.getUserByEmail(email), HttpStatus.OK);
     }
 
-    @GetMapping("/contact")
-    public ResponseEntity contact(){
-        return new ResponseEntity("You can Contact me at 8830703113", HttpStatus.OK);
+    @GetMapping("/profile")
+    public ResponseEntity getCurrentProfile(){
+        var currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new ResponseEntity(userService.getUserByEmail(currentUser), HttpStatus.OK);
     }
 
-    @GetMapping("/encodePassword/{email}")
-    public ResponseEntity encodePassword(@PathVariable(value = "email") String email){
-        return new ResponseEntity(userService.encodePasswords(email), HttpStatus.OK);
-    }
 }
