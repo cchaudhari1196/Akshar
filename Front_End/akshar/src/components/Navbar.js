@@ -5,8 +5,8 @@ import Container from "react-bootstrap/Container";
 import logo from "../Assets/logo.png";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { CgGitFork } from "react-icons/cg";
-import { ImBlog, ImUser } from "react-icons/im";
+import { CgGitFork, CgUser } from "react-icons/cg";
+import { ImUser } from "react-icons/im";
 import {
   AiFillStar,
   AiOutlineHome,
@@ -14,7 +14,7 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 
-function NavBar() {
+function NavBar({ user }) {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
 
@@ -80,17 +80,51 @@ function NavBar() {
               </Nav.Link>
             </Nav.Item>
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/login"
-                onClick={() => updateExpanded(false)}
-              >
-                <ImUser style={{ marginBottom: "2px" }} /> Sign-in
-              </Nav.Link>
-            </Nav.Item>
+            {!user && (
+              <React.Fragment>
+                <Nav.Item>
+                  <Nav.Link
+                    as={Link}
+                    className="nav-link"
+                    to="/login"
+                    onClick={() => updateExpanded(false)}
+                  >
+                    Login
+                  </Nav.Link>
+                </Nav.Item>
 
-            <Nav.Item className="fork-btn">
+                <Nav.Item>
+                  <Nav.Link
+                    as={Link}
+                    className="nav-link"
+                    to="/register"
+                    onClick={() => updateExpanded(false)}
+                  >
+                    Register
+                  </Nav.Link>
+                </Nav.Item>
+              </React.Fragment>
+            )}
+            {user && (
+              <React.Fragment>
+                <Nav.Item>
+                  <Nav.Link as={Link} className="nav-link" to="/logout">
+                    Logout
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    className="nav-link"
+                    to="/profile"
+                    onClick={() => updateExpanded(false)}
+                  >
+                    <CgUser style={{ fontSize: "1.1em" }} />
+                  </Nav.Link>
+                </Nav.Item>
+              </React.Fragment>
+            )}
+
+            {/* <Nav.Item className="fork-btn">
               <Button
                 href="https://github.com/soumyajit4419/Portfolio"
                 target="_blank"
@@ -99,7 +133,7 @@ function NavBar() {
                 <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
                 <AiFillStar style={{ fontSize: "1.1em" }} />
               </Button>
-            </Nav.Item>
+            </Nav.Item> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
