@@ -5,7 +5,7 @@ import Particle from "../Particle";
 import Home2 from "./Home2";
 import Type from "./Type";
 
-function Home() {
+function Home({ user }) {
   return (
     <section>
       <Container fluid className="home-section" id="home">
@@ -14,7 +14,10 @@ function Home() {
           <Row>
             <Col md={7} className="home-header">
               <h1 style={{ paddingBottom: 15 }} className="heading">
-                Hi There! <span className="wave" role="img" aria-labelledby="wave">👋🏻</span>
+                Hi {user ? user.email.split("@")[0] : "There"}!{" "}
+                <span className="wave" role="img" aria-labelledby="wave">
+                  👋🏻
+                </span>
               </h1>
 
               <h1 className="heading-name">

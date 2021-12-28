@@ -17,6 +17,8 @@ import auth from "./services/authService";
 
 import React, { Component } from "react";
 import Logout from "./components/Login/logout";
+import Profile from "./components/Profile/profile";
+
 class App extends React.Component {
   state = {
     load: true,
@@ -46,13 +48,18 @@ class App extends React.Component {
           <Navbar user={user} />
           <ScrollToTop />
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route
+              path="/"
+              exact
+              render={(props) => <Home {...props} user={user}></Home>}
+            />
             <Route exact path="/project" component={Projects} />
             <Route path="/about" component={About} />
             <Route path="/project/:id" component={ProjectDetail} />
             <Route path="/contact" component={Contacts} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
+            <Route path="/profile" component={Profile} />
           </Switch>
           <Footer />
         </div>

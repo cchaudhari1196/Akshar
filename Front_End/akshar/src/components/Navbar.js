@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import logo from "../Assets/logo.png";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { CgGitFork, CgUser } from "react-icons/cg";
-import { ImUser } from "react-icons/im";
+import { CgUser } from "react-icons/cg";
 import {
-  AiFillStar,
+  AiOutlineLogin,
   AiOutlineHome,
   AiOutlineFundProjectionScreen,
   AiOutlineUser,
+  AiOutlineLogout,
 } from "react-icons/ai";
+import logo from "../Assets/logo.png";
 
 function NavBar({ user }) {
   const [expand, updateExpanded] = useState(false);
@@ -81,44 +80,33 @@ function NavBar({ user }) {
             </Nav.Item>
 
             {!user && (
-              <React.Fragment>
-                <Nav.Item>
-                  <Nav.Link
-                    as={Link}
-                    className="nav-link"
-                    to="/login"
-                    onClick={() => updateExpanded(false)}
-                  >
-                    Login
-                  </Nav.Link>
-                </Nav.Item>
-
-                <Nav.Item>
-                  <Nav.Link
-                    as={Link}
-                    className="nav-link"
-                    to="/register"
-                    onClick={() => updateExpanded(false)}
-                  >
-                    Register
-                  </Nav.Link>
-                </Nav.Item>
-              </React.Fragment>
+              <Nav.Item>
+                <Nav.Link
+                  as={Link}
+                  className="nav-link"
+                  to="/login"
+                  onClick={() => updateExpanded(false)}
+                >
+                  <AiOutlineLogin style={{ marginBottom: "2px" }} /> Login
+                </Nav.Link>
+              </Nav.Item>
             )}
             {user && (
               <React.Fragment>
                 <Nav.Item>
                   <Nav.Link as={Link} className="nav-link" to="/logout">
-                    Logout
+                    <AiOutlineLogout style={{ marginBottom: "2px" }} /> Logout
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link
+                    as={Link}
                     className="nav-link"
                     to="/profile"
                     onClick={() => updateExpanded(false)}
                   >
-                    <CgUser style={{ fontSize: "1.1em" }} />
+                    <AiOutlineUser style={{ marginBottom: "2px" }} />{" "}
+                    {user && user.email.split("@")[0]}
                   </Nav.Link>
                 </Nav.Item>
               </React.Fragment>
