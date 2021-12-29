@@ -48,8 +48,13 @@ class Login extends Form {
       >
         <Container>
           <div>
-            <h1>Login</h1>
-            <form onSubmit={this.handleSubmit}>
+            <h1 style={{ color: "#eaeaea" }}>Login</h1>
+            <form
+              onSubmit={this.handleSubmit}
+              style={{
+                textAlign: "-webkit-center",
+              }}
+            >
               {this.renderInput("username", "Username")}
               {this.renderInput("password", "Password", "password")}
               {this.renderButton("Login")}
