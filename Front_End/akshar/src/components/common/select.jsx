@@ -2,8 +2,15 @@ import React from "react";
 
 const Select = ({ name, label, options, error, ...rest }) => {
   return (
-    <div className="form-group">
-      <label htmlFor={name}>{label}</label>
+    <div
+      className="form-group"
+      // style={{
+      //   width: "30vw",
+      // }}
+    >
+      <label htmlFor={name} style={{ color: "#eaeaea" }}>
+        {label}
+      </label>
       <select name={name} id={name} {...rest} className="form-control">
         <option value="" />
         {options.map((option) => (

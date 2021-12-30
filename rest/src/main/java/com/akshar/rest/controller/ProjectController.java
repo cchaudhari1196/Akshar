@@ -26,7 +26,7 @@ public class ProjectController {
         return new ResponseEntity("Deleted id " + id, HttpStatus.OK);
     }
 
-    @PutMapping()
+    @PatchMapping
     public ResponseEntity update(@RequestBody ProjectDto project){
         projectServiceImpl.updateProject(project);
         return new ResponseEntity("Updated id " + project.getId().toString(), HttpStatus.OK);

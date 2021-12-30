@@ -48,12 +48,12 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  renderButton(label) {
+  renderButton(label, width = "none") {
     return (
       <button
         disabled={this.validate()}
         className="btn btn-primary"
-        style={{ width: "30vw" }}
+        style={{ width: width }}
       >
         {label}
       </button>

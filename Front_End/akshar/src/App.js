@@ -18,6 +18,7 @@ import auth from "./services/authService";
 import React, { Component } from "react";
 import Logout from "./components/Login/logout";
 import Profile from "./components/Profile/profile";
+import ProjectForm from "./components/ProjectDetail/ProjectForm";
 
 class App extends React.Component {
   state = {
@@ -56,6 +57,7 @@ class App extends React.Component {
             <Route exact path="/project" component={Projects} />
             <Route path="/about" component={About} />
             <Route path="/project/:id" component={ProjectDetail} />
+            <Route path="/projectForm" component={ProjectForm} />
             <Route path="/contact" component={Contacts} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />

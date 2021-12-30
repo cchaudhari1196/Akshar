@@ -6,9 +6,9 @@ const Input = ({ name, label, error, ...rest }) => {
   return (
     <div
       className="form-group"
-      style={{
-        width: "30vw",
-      }}
+      // style={{
+      //   width: "30vw",
+      // }}
     >
       <label htmlFor={name} style={{ color: "#eaeaea" }}>
         {label}

@@ -3,7 +3,7 @@ import Joi from "joi-browser";
 import Form from "./../common/form";
 import auth from "./../../services/authService";
 import { Redirect } from "react-router-dom";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { VerticalAlignCenter } from "@material-ui/icons";
 
 class Login extends Form {
@@ -55,9 +55,21 @@ class Login extends Form {
                 textAlign: "-webkit-center",
               }}
             >
-              {this.renderInput("username", "Username")}
-              {this.renderInput("password", "Password", "password")}
-              {this.renderButton("Login")}
+              <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
+                <Col xs={12} md={6}>
+                  {this.renderInput("username", "Username")}
+                </Col>
+              </Row>
+              <Row style={{ justifyContent: "center", paddingBottom: "20px" }}>
+                <Col xs={12} md={6}>
+                  {this.renderInput("password", "Password", "password")}
+                </Col>
+              </Row>
+              <Row style={{ justifyContent: "center" }}>
+                <Col xs={12} md={6}>
+                  {this.renderButton("Login", "30vw")}
+                </Col>
+              </Row>
             </form>
           </div>
         </Container>
