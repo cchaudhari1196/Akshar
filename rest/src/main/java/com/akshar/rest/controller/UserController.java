@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public ResponseEntity getCurrentProfile(){
-        var currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         return new ResponseEntity(userService.getUserByEmail(currentUser), HttpStatus.OK);
     }
 

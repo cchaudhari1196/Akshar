@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @PostMapping
     public ResponseEntity login(){
-        var currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         return new ResponseEntity(currentUser + " Logged In", HttpStatus.OK);
     }
 }

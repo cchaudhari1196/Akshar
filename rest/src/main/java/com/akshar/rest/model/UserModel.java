@@ -72,7 +72,7 @@ public class UserModel {
         this.address = address;
     }
 
-    public User createModel(){
+    public User createEntity(){
         User user = new User();
         user.setUsername(this.username);
         user.setTime(this.getTime());
@@ -98,7 +98,7 @@ public class UserModel {
         return user;
     }
 
-    public static UserModel createModel(User user){
+    public static UserModel createEntity(User user){
         UserModel model = new UserModel();
         model.setId(user.getId());
         model.setUsername(user.getUsername());

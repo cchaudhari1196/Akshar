@@ -29,16 +29,20 @@ public class User {
     @Column
     private Date time;
 
+    /*This is unidirectional Approch..Its more advannced approch*/
+    /*Cascade all denotes, Cascassing among  sub table and master table*/
+    /*One-current class _____TO ___________Many- Sub class i.e. Address here */
+    /*Join column : name- column name from DB that is used to to join these 2 tables i.e. User and Address.
+    *               : refernceColumnName- Column from current table(User) which is involved in this relationship.*/
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private List<Address> address;
 
+    /*This is Bidirectional Approch: i.e. In User, will have filed named roles. And in Role, we will have field named User */
+    /*mappedBy - In Role class, what is the name of field(which involve in the relationship)*/
     @JsonIgnore
     @OneToMany(mappedBy = "user",cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
-
-    @Column
-    private Boolean status;
 
     public Long getId() {
         return id;
@@ -78,14 +82,6 @@ public class User {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 
     public List<Address> getAddress() {

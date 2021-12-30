@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "5a928839-b943-4772-8281-a763facb3c72",
+		"name": "Akshar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createUsers",
+			"item": [
+				{
+					"name": "http://localhost:8080/user/create",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Aishu@1196",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "aishu@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Pratik\",\r\n    \"email\": \"Pratik@gmail.com\",\r\n    \"password\": \"Pratik@1196\",\r\n    \"address\": [\r\n        {\r\n            \"line1\": \"Mahabal\",\r\n            \"line2\": \"polic station\",\r\n            \"city\": \"Jalgaon\",\r\n            \"country\": \"IN\",\r\n            \"pincode\": 425001\r\n        }\r\n    ],\r\n    \"roles\":[\r\n        {\r\n            \"name\":\"USER\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/user/create Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Pratik\",\r\n    \"email\": \"Pratik@gmail.com\",\r\n    \"password\": \"Pratik@1196\",\r\n    \"address\": [\r\n        {\r\n            \"line1\": \"Mahabal\",\r\n            \"line2\": \"polic station\",\r\n            \"city\": \"Jalgaon\",\r\n            \"country\": \"IN\",\r\n            \"pincode\": 425001\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/user/create Copy 2",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Aishu@1196",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "aishu@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Aishu\",\r\n    \"email\": \"Aishu@gmail.com\",\r\n    \"password\": \"Aishu@1196\",\r\n    \"address\": [\r\n        {\r\n            \"line1\": \"samata coony\",\r\n            \"line2\": \"retail store\",\r\n            \"city\": \"Khamgaon\",\r\n            \"country\": \"IN\",\r\n            \"pincode\": 422555\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBa3NoYXIiLCJzdWIiOiJKV1QgVG9rZW4iLCJlbWFpbCI6IkNoaXJhZ0BnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IkFETUlOLFVTRVIiLCJpYXQiOjE2NDA4NTg0MjMsImV4cCI6MTY0MDg4ODQyM30.PPdqxDloqOgMHQvV_5IgnA9NyxU4sOg11aPNGo4_juw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectName\":\"MHADA Electrification Bhusawal\",\r\n    \"owner\":\"MHADA\",\r\n    \"description\":\"sdhfgksjfklsjgkldfjgldfgjdf\",\r\n    \"projectStatus\":\"COMPLETED\",\r\n    \"imageGroup\":{\r\n        \"name\":\"carousal\",\r\n        \"images\":[{\r\n            \"name\":\"img1\",\r\n            \"address\": \"url1\",\r\n            \"description\":\"Some Image Description\"\r\n        }]\r\n    },\r\n    \"informationBlocks\":[{\r\n        \"title\":\"Highlights\",\r\n        \"subInformationBlocks\":[{\r\n            \"title\":\"Advanatged\",\r\n            \"subTitle\":\"subTitle here\",\r\n            \"informations\":[\r\n                {\"description\":\"Description 1\"},\r\n                {\"description\":\"Description 2\"},\r\n                {\"description\":\"Description 3\"}\r\n            ]\r\n        }]\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBa3NoYXIiLCJzdWIiOiJKV1QgVG9rZW4iLCJlbWFpbCI6IkNoaXJhZ0BnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IlVTRVIiLCJpYXQiOjE2NDA4NDgxODAsImV4cCI6MTY0MDg3ODE4MH0.xISfY-Pv3uIbeMSbf3TgpEjSDE7taHZmXs4sQkN-jko",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":8,\r\n    \"projectName\":\"MHADA Electrification Bhusawal\",\r\n    \"owner\":\"MHADA\",\r\n    \"description\":\"sdhfgksjfklsjgkldfjgldfgjdf\",\r\n    \"projectStatus\":\"COMPLETED\",\r\n    \"imageGroup\":{\r\n        \"id\":9,\r\n        \"name\":\"New carousal\",\r\n        \"images\":[{\r\n            \"id\":9,\r\n            \"name\":\"img1\",\r\n            \"address\": \"url1\",\r\n            \"description\":\"Some Image Description\"\r\n        }]\r\n    },\r\n    \"informationBlocks\":[{\r\n        \"id\":9,\r\n        \"title\":\"Highlights\",\r\n        \"subInformationBlocks\":[{\r\n            \"id\":4,\r\n            \"title\":\"Advanatges\",\r\n            \"subTitle\":\"subTitle here\",\r\n            \"informations\":[\r\n                {\"id\":10,\"description\":\"Description 1\"},\r\n                {\"id\":11,\"description\":\"Description 2\"},\r\n                {\"id\":12,\"description\":\"Description 5\"}\r\n            ]\r\n        }]\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProject",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBa3NoYXIiLCJzdWIiOiJKV1QgVG9rZW4iLCJlbWFpbCI6IkNoaXJhZ0BnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IlVTRVIiLCJpYXQiOjE2NDA4NDgxODAsImV4cCI6MTY0MDg3ODE4MH0.xISfY-Pv3uIbeMSbf3TgpEjSDE7taHZmXs4sQkN-jko",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/project/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"project",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getByEmail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/byEmail/aishu@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"byEmail",
+						"aishu@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contact",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Pratik@1196",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Pratik@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/contact",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GiveAUthority",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Aishu@1196",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Aishu@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"authorityTo\":7,\r\n    \"authority\":\"ADMIN\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/giveAuthority",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"giveAuthority"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "User profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}

@@ -9,7 +9,6 @@ import com.akshar.rest.persistence.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void createCustomer(UserModel userModel) {
         logger.info("Creation request for customer {}", userModel);
-        User cust = userModel.createModel();
+        User cust = userModel.createEntity();
         userRepository.save(cust);
     }
 
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByEmailAddress(email);
         if (user == null)
             return null;
-        return UserModel.createModel(user);
+        return UserModel.createEntity(user);
     }
 
     // Login
