@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Particle from "../Particle";
+import Particle from "../../Particle";
 import ProjectContentFormat from "./ProjectContentFormat";
 import ControlledCarousel from "./carousel";
-import Contacts from "../Contacts/Contacts.js";
-import Testimonial from "./../Testimonials/Testimonial";
+import Contacts from "../../Contacts/Contacts.js";
+import Testimonial from "./../../Testimonials/Testimonial";
 import {
   projectsData,
   carouselDataProjectOne as carouselData,
-} from "./../../Assets/data/projectsData";
+} from "./../../../Assets/data/projectsData";
 
 function ProjectDetail(props) {
   var [project, setProject] = useState();
