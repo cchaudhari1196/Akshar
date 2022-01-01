@@ -4,7 +4,11 @@ import Joi from "joi-browser";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import Informations from "./Informations";
 
+import { ThemeContext } from "../../../contexts/ThemeContext.js";
+
 class InformationBlockForm extends Form {
+  static contextType = ThemeContext;
+
   state = {
     data: {
       id: -1,
@@ -16,6 +20,10 @@ class InformationBlockForm extends Form {
 
     informationCount: 1,
   };
+
+  componentDidMount() {
+    console.log(this.context);
+  }
 
   schema = {
     title: Joi.string().required(),
@@ -38,10 +46,14 @@ class InformationBlockForm extends Form {
     return (
       <Container fluid>
         <Row style={{ justifyContent: "center", paddingBottom: "0.5rem" }}>
-          <Col md="6">
-            <h5>{this.renderInput("title", "Title")}</h5>
-          </Col>
+          <Col md="6">{this.renderInput("title", "Title")}</Col>
           <Col md="6">{this.renderInput("subTitle", "Sub Title")}</Col>
+        </Row>
+
+        <Row style={{ justifyContent: "center", paddingBottom: "0.5rem" }}>
+          <h6 className="project-sub-heading">
+            Add <strong className="purple">bullet points. </strong>
+          </h6>
         </Row>
         <Row style={{ justifyContent: "center", paddingBottom: "0.5rem" }}>
           {this.state.data.informations.map((info, index) => {

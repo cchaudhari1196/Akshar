@@ -537,6 +537,13 @@ html {
   padding-top: 10px !important;
 }
 
+.project-sub-heading {
+  color: white !important;
+  font-size: 1.1em !important;
+  font-weight: 500 !important;
+  padding-top: 10px !important;
+}
+
 /* --------- */
 /* About */
 /* --------- */

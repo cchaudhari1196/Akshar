@@ -8,8 +8,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InformationBlockForm from "./InformationBlock";
+import { ThemeContext } from "./../../../contexts/ThemeContext";
 
 class ProjectForm extends Form {
+  static contextType = ThemeContext;
+
+  componentDidMount() {
+    this.setState({ theme: this.theme });
+  }
+
   state = {
     data: {
       id: -1,
@@ -61,6 +68,17 @@ class ProjectForm extends Form {
     informationBlocks: Joi.array().min(1),
   };
 
+  style = {
+    accordionBox: {
+      backgroundColor: "transparent",
+      border: "solid #c770f0",
+      // + this.context.theme.secondary
+    },
+    headerInDark: {
+      color: this.context.theme.tertiary,
+    },
+  };
+
   doSubmit = async () => {
     this.props.history.push("/project");
   };
@@ -84,24 +102,24 @@ class ProjectForm extends Form {
           <h1 className="project-heading">
             Add <strong className="purple">Project </strong>
           </h1>
-          <p style={{ color: "white" }}>
+          <p style={this.style.headerInDark}>
             Fill all the details to add Project in Akshar Tool.
           </p>
           <form onSubmit={this.handleSubmit}>
             <Row>
               <Col xs={12} md={12}>
-                {this.renderInput("projectName", "projectName")}
+                {this.renderInput("projectName", "Project Name")}
               </Col>
             </Row>
             <Row style={{ justifyContent: "center", paddingBottom: "35px" }}>
               <Col xs={12} md={6}>
-                {this.renderSelect("projectStatus", "projectStatus", [
+                {this.renderSelect("projectStatus", "Project Status", [
                   { _id: "In Progress", name: "In Progress" },
                   { _id: "Completed", name: "Completed" },
                 ])}
               </Col>
               <Col xs={12} md={6}>
-                {this.renderInput("description", "description")}
+                {this.renderInput("description", "Description")}
               </Col>
             </Row>
 
@@ -109,13 +127,15 @@ class ProjectForm extends Form {
               <Col md="12">
                 {this.state.data.informationBlocks.map((infoBlock, index) => {
                   return (
-                    <Accordion>
+                    <Accordion style={this.style.accordionBox}>
                       <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                       >
-                        <Typography>{infoBlock.title}</Typography>
+                        <Typography className="project-sub-heading">
+                          {infoBlock.title}
+                        </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Typography>

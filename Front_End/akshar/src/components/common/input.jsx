@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { ThemeContext } from "./../../contexts/ThemeContext";
 
-const Input = ({ name, label, error, ...rest }) => {
+function Input({ name, label, error, ...rest }) {
+  const { theme } = useContext(ThemeContext);
+  const style = {
+    color: theme.tertiary,
+  };
+
   return (
     <div className="form-group">
       {label && (
-        <label htmlFor={name} style={{ color: "#eaeaea" }}>
+        <label htmlFor={name} style={style}>
           {label}
         </label>
       )}
@@ -14,6 +18,6 @@ const Input = ({ name, label, error, ...rest }) => {
       {error && <div className="alert alert-danger">{error}</div>}
     </div>
   );
-};
+}
 
 export default Input;

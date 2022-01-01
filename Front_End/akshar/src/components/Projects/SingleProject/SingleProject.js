@@ -39,7 +39,6 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
       <div
         key={id}
         className="singleProject"
-        style={{ backgroundColor: "rgb(199 112 240)" }}
         onClick={() => {
           history.push(`/project/${id}`);
         }}
