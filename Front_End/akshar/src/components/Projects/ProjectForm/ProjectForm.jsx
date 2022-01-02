@@ -38,17 +38,15 @@ class ProjectForm extends Form {
       informationBlocks: [
         {
           id: -1,
+          // this title will be taken from sub information block
           title: "Information Block 1",
+          // Only one subblock will be there for now.
           subInformationBlocks: [
             {
               id: -1,
               title: "",
               subTitle: "",
-              informations: [
-                { id: -1, description: "" },
-                { id: -1, description: "" },
-                { id: -1, description: "" },
-              ],
+              informations: [{ id: -1, description: "" }],
             },
           ],
         },
@@ -88,9 +86,17 @@ class ProjectForm extends Form {
     if (index == -1) {
       data.informationBlocks.push({
         title: "Information Block " + (data.informationBlocks.length + 1),
+        subInformationBlocks: [
+          {
+            id: -1,
+            title: "",
+            subTitle: "",
+            informations: [{ description: "From Project Form " }],
+          },
+        ],
       });
     } else {
-      data.informationBlocks[index] = informationBlock;
+      data.informationBlocks[index].subInformationBlocks[0] = informationBlock;
     }
     this.setState({ data });
   };
@@ -148,6 +154,7 @@ class ProjectForm extends Form {
                       <AccordionDetails>
                         <InformationBlockForm
                           index={index}
+                          data={infoBlock.subInformationBlocks[0]}
                           populate={this.updateInformationBlock}
                         ></InformationBlockForm>
                       </AccordionDetails>

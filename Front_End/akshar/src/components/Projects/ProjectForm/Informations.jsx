@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ControlledForm from "./../../common/controlledForm";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import Joi from "joi-browser";
 import { FaPlus, FaTimes } from "react-icons/fa";
