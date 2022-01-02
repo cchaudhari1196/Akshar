@@ -83,7 +83,7 @@ class ProjectForm extends Form {
     this.props.history.push("/project");
   };
 
-  addInformationBlock = (informationBlock, index = -1) => {
+  updateInformationBlock = (informationBlock, index = -1) => {
     const data = { ...this.state.data };
     if (index == -1) {
       data.informationBlocks.push({
@@ -122,14 +122,22 @@ class ProjectForm extends Form {
                 {this.renderInput("description", "Description")}
               </Col>
             </Row>
+            <Row style={{ justifyContent: "center", paddingBottom: "0.5rem" }}>
+              <h6 className="project-sub-heading">
+                Add <strong className="purple">Information </strong> as multiple
+                Blocks.
+              </h6>
+            </Row>
 
             <Row style={{ justifyContent: "left", paddingBottom: "35px" }}>
               <Col md="12">
                 {this.state.data.informationBlocks.map((infoBlock, index) => {
                   return (
-                    <Accordion style={this.style.accordionBox}>
+                    <Accordion style={this.style.accordionBox} key={index}>
                       <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
+                        expandIcon={
+                          <ExpandMoreIcon style={this.style.headerInDark} />
+                        }
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                       >
@@ -138,12 +146,10 @@ class ProjectForm extends Form {
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-                        <Typography>
-                          <InformationBlockForm
-                            index={index}
-                            add={this.addInformationBlock}
-                          ></InformationBlockForm>
-                        </Typography>
+                        <InformationBlockForm
+                          index={index}
+                          populate={this.updateInformationBlock}
+                        ></InformationBlockForm>
                       </AccordionDetails>
                     </Accordion>
                   );
@@ -154,7 +160,7 @@ class ProjectForm extends Form {
               <Col>
                 <Button
                   variant="primary"
-                  onClick={() => this.addInformationBlock({})}
+                  onClick={() => this.updateInformationBlock({})}
                 >
                   Add More Information
                 </Button>

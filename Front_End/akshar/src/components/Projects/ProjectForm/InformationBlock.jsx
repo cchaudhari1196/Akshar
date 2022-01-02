@@ -14,32 +14,37 @@ class InformationBlockForm extends Form {
       id: -1,
       title: "",
       subTitle: "",
-      informations: [{ id: -1, description: "" }],
+      informations: [{ description: "" }],
     },
     errors: {},
 
     informationCount: 1,
   };
 
-  componentDidMount() {
-    console.log(this.context);
-  }
-
   schema = {
     title: Joi.string().required(),
     subTitle: Joi.string().optional(),
   };
 
-  addInformation = (information, index) => {
+  addBlankInformation = (index) => {
     const data = { ...this.state.data };
-    data.informations.splice(index, 0, information);
+    data.informations.splice(index + 1, 0, { description: "" });
     this.setState({ data });
+  };
+
+  updateInformation = (information, index) => {
+    this.state.data.informations[index] = information;
+    this.setState({ data: this.state.data });
   };
 
   removeInformation = (index) => {
     const data = { ...this.state.data };
     data.informations.splice(index, 1);
     this.setState({ data });
+  };
+
+  populateParent = () => {
+    this.props.populate(this.state.data, this.props.index);
   };
 
   render() {
@@ -59,20 +64,15 @@ class InformationBlockForm extends Form {
           {this.state.data.informations.map((info, index) => {
             return (
               <Informations
-                add={this.addInformation}
+                key={index}
+                add={this.addBlankInformation}
                 remove={this.removeInformation}
+                updateParent={this.updateInformation}
                 index={index}
                 data={info}
               ></Informations>
             );
           })}
-        </Row>
-        <Row style={{ justifyContent: "center", paddingBottom: "0.5rem" }}>
-          <Button
-            onClick={() => this.props.add(this.state.data, this.props.index)}
-          >
-            Save
-          </Button>
         </Row>
       </Container>
     );

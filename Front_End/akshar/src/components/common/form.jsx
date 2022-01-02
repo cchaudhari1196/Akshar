@@ -46,6 +46,7 @@ class Form extends Component {
     data[input.name] = input.value;
 
     this.setState({ data, errors });
+    this.populateParent && this.populateParent();
   };
 
   renderButton(label, width = "none") {
