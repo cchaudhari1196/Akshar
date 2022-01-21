@@ -1,5 +1,6 @@
 package com.akshar.rest.service;
 
+import com.akshar.rest.entities.ImageGroup;
 import com.akshar.rest.entities.InformationBlock;
 import com.akshar.rest.entities.Project;
 import com.akshar.rest.mapper.ProjectMapper;
@@ -9,6 +10,7 @@ import com.akshar.rest.persistence.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Autowired
     private ProjectMapper mapper;
+
+    @Autowired
+    EntityManager em;
 
     @Override
     public void createProject(final ProjectDto projectDto){
@@ -35,8 +40,23 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Override
     public void updateProject(ProjectDto projectDto) {
-        Project project = projectRepository.findById(projectDto.getId()).get();
-        mapper.updateProjectFromDto(projectDto,project);
+        /*This is one way to map using pre existing library. With Bidirectional it doent work*/
+//        Project project = projectRepository.findById(projectDto.getId()).get();
+//        mapper.updateProjectFromDto(projectDto,project);
+
+        /*This method gives more control to us*/
+        Project project = projectDto.createEntity();
+        ImageGroup ig = projectDto.getImageGroup().createImageGroup();
+        List<InformationBlock> informationBlocks = projectDto.createInformationBlock();
+        project.setInformationBlocks(informationBlocks);
+        project.setImageGroup(ig);
+
         projectRepository.save(project);
+    }
+
+    @Override
+    public ProjectDto getProject(Long id) {
+        Project project = projectRepository.findById(id).get();
+        return ProjectDto.createModel(project);
     }
 }

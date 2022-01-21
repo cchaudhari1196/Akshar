@@ -18,8 +18,11 @@ public class SubInformationBlock {
     @Column
     private String subTitle;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sub_information_block_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "information_block_id")
+    private InformationBlock informationBlock;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "subInformationBlock",fetch = FetchType.EAGER)
     private List<Information> informations;
 
     public Long getId() {
@@ -54,9 +57,27 @@ public class SubInformationBlock {
         this.informations = informations;
     }
 
+    public InformationBlock getInformationBlock() {
+        return informationBlock;
+    }
+
+    public void setInformationBlock(InformationBlock informationBlock) {
+        this.informationBlock = informationBlock;
+    }
+
     public void addInformations(Information information) {
         if(this.informations == null)
             this.informations = new ArrayList<>();
         this.informations.add(information);
+        if(information.getSubInformationBlock() != this)
+            information.setSubInformationBlock(this);
+    }
+
+    public Information removeInformations(Information information) {
+        if(informations == null)
+            return null;
+        this.informations.remove(information);
+        information.setSubInformationBlock(null);
+        return information;
     }
 }

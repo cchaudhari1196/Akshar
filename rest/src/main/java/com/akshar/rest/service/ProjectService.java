@@ -8,5 +8,7 @@ public interface ProjectService {
     void deleteProject(Long id);
 
     void updateProject(ProjectDto project);
+
+    ProjectDto getProject(Long id);
 }
 

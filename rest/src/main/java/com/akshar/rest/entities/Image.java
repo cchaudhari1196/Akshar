@@ -19,6 +19,10 @@ public class Image {
     @Column
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_group_id", nullable = true)
+    private ImageGroup imageGroup;
+
     public Long getId() {
         return id;
     }
@@ -49,5 +53,15 @@ public class Image {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ImageGroup getImageGroup() {
+        return imageGroup;
+    }
+
+    public void setImageGroup(ImageGroup imageGroup) {
+        this.imageGroup = imageGroup;
+        if(!imageGroup.getImages().contains(this))
+            imageGroup.getImages().add(this);
     }
 }

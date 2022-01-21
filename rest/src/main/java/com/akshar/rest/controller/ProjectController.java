@@ -2,6 +2,7 @@ package com.akshar.rest.controller;
 
 import com.akshar.rest.model.ProjectDto;
 import com.akshar.rest.service.ProjectService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,12 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectServiceImpl;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectDto> getProject(@PathVariable Long id){
+        ProjectDto projectDto = projectServiceImpl.getProject(id);
+        return new ResponseEntity<>(projectDto, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity create(@RequestBody ProjectDto project){

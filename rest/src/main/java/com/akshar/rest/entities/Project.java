@@ -1,6 +1,7 @@
 package com.akshar.rest.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,8 +28,7 @@ public class Project {
     @JoinColumn(name = "image_group_id")
     private ImageGroup imageGroup;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project", orphanRemoval = true)
     private List<InformationBlock> informationBlocks;
 
     public Long getId() {
@@ -76,7 +76,9 @@ public class Project {
     }
 
     public void setInformationBlocks(List<InformationBlock> informationBlocks) {
-        this.informationBlocks = informationBlocks;
+        for(InformationBlock informationBlock: informationBlocks){
+            this.addInformationBlock(informationBlock);
+        }
     }
 
     public ImageGroup getImageGroup() {
@@ -85,5 +87,12 @@ public class Project {
 
     public void setImageGroup(ImageGroup imageGroup) {
         this.imageGroup = imageGroup;
+    }
+
+    public void addInformationBlock(InformationBlock informationBlock){
+        if(this.informationBlocks == null)
+            this.informationBlocks = new ArrayList<>();
+        this.informationBlocks.add(informationBlock);
+        informationBlock.setProject(this);
     }
 }

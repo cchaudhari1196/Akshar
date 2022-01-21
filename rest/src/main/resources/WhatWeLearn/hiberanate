@@ -1,0 +1,7 @@
+ mappedBy - specify who is owner in the relationship
+ cascase - https://www.baeldung.com/jpa-cascade-types -
+     *          REMOVE - remove operation will propagate from parent(Imagegrp) to child(image). SO deleting ImageGrp will delete image as well
+     *          PERSIST - persisting image grp will persist its child i.e. image as well
+     *          ALL - all   operations will be propagated from parent to child
+ Fetch - How to Load data from DB
+ Orphan removal- if image is removed from images list. From DB also it will be removed

@@ -1,5 +1,8 @@
 package com.akshar.rest.model;
 
+import com.akshar.rest.entities.Information;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubInformationBlockDto {
@@ -38,5 +41,11 @@ public class SubInformationBlockDto {
 
     public void setInformations(List<InformationDto> informations) {
         this.informations = informations;
+    }
+
+    public void addInformations(InformationDto info) {
+        if(informations == null)
+            informations = new ArrayList<>();
+        informations.add(info);
     }
 }

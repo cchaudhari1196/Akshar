@@ -72,42 +72,38 @@ public class ProjectDto {
 
     public Project createEntity(){
         Project project = new Project();
+        project.setId(this.id);
         project.setProjectName(this.projectName);
         project.setProjectStatus(this.projectStatus);
         project.setOwner(this.owner);
         project.setDescription(this.description);
 
-        if(this.imageGroup != null){
-            ImageGroup ig = new ImageGroup();
-            ig.setName(this.imageGroup.getName());
-            for(ImageDto imageDto: this.imageGroup.getImages()){
-                Image image = new Image();
-                image.setName(imageDto.getName());
-                image.setAddress(imageDto.getAddress());
-                image.setDescription(imageDto.getDescription());
-                ig.addImages(image);
-            }
-            project.setImageGroup(ig);
-        }
-
-        if(this.informationBlocks != null)
-            project.setInformationBlocks(createInformationBlock());
+//        if(this.imageGroup != null){
+//            project.setImageGroup(createImageGroup());
+//        }
+//
+//        if(this.informationBlocks != null)
+//            project.setInformationBlocks(createInformationBlock());
         return project;
     }
 
-    private List<InformationBlock> createInformationBlock(){
+    /*This method is added in Project DTO bcz information this is owned by Project*/
+    public List<InformationBlock> createInformationBlock(){
         List<InformationBlock> informationBlocks = new ArrayList<>();
         for(InformationBlockDto informationBlockDto: this.informationBlocks){
             InformationBlock informationBlock = new InformationBlock();
+            informationBlock.setId(informationBlockDto.getId());
             informationBlock.setTitle(informationBlockDto.getTitle());
 
             for(SubInformationBlockDto subInfoBlockDto : informationBlockDto.getSubInformationBlocks()){
                 SubInformationBlock subInfoBlock = new SubInformationBlock();
+                subInfoBlock.setId(subInfoBlockDto.getId());
                 subInfoBlock.setTitle(subInfoBlockDto.getTitle());
                 subInfoBlock.setSubTitle(subInfoBlockDto.getSubTitle());
 
                 for(InformationDto infoDto: subInfoBlockDto.getInformations()){
                     Information info = new Information();
+                    info.setId(infoDto.getId());
                     info.setDescription(infoDto.getDescription());
                     subInfoBlock.addInformations(info);
                 }
@@ -116,5 +112,58 @@ public class ProjectDto {
             informationBlocks.add(informationBlock);
         }
         return informationBlocks;
+    }
+
+    public static ProjectDto createModel(Project project){
+        ProjectDto dto = new ProjectDto();
+        dto.setDescription(project.getDescription());
+        dto.setId(project.getId());
+        dto.setProjectName(project.getProjectName());
+        dto.setOwner(project.getOwner());
+        dto.setProjectStatus(project.getProjectStatus());
+
+        if(project.getImageGroup() != null){
+            ImageGroupDto imageGroupDto = new ImageGroupDto();
+            imageGroupDto.setName(project.getImageGroup().getName());
+            imageGroupDto.setId(project.getImageGroup().getId());
+            for(Image img: project.getImageGroup().getImages()){
+                ImageDto imageDto = new ImageDto();
+                imageDto.setId(img.getId());
+                imageDto.setName(img.getName());
+                imageDto.setAddress(img.getAddress());
+                imageDto.setDescription(img.getDescription());
+                imageGroupDto.addImages(imageDto);
+            }
+            dto.setImageGroup(imageGroupDto);
+        }
+
+        dto.setInformationBlocks(createInformationBlockDto(project));
+        return dto;
+    }
+
+    private static List<InformationBlockDto> createInformationBlockDto(Project project){
+        List<InformationBlockDto> informationBlocksDto = new ArrayList<>();
+        for(InformationBlock informationBlock: project.getInformationBlocks()){
+            InformationBlockDto informationBlockDto = new InformationBlockDto();
+            informationBlockDto.setTitle(informationBlock.getTitle());
+            informationBlockDto.setId(informationBlock.getId());
+
+            for(SubInformationBlock subInfoBlock : informationBlock.getSubInformationBlocks()){
+                SubInformationBlockDto subInfoBlockDto = new SubInformationBlockDto();
+                subInfoBlockDto.setTitle(subInfoBlock.getTitle());
+                subInfoBlockDto.setSubTitle(subInfoBlock.getSubTitle());
+                subInfoBlockDto.setId(subInfoBlock.getId());
+
+                for(Information info: subInfoBlock.getInformations()){
+                    InformationDto infoDto = new InformationDto();
+                    infoDto.setDescription(info.getDescription());
+                    infoDto.setId(info.getId());
+                    subInfoBlockDto.addInformations(infoDto);
+                }
+                informationBlockDto.addSubInformationBlocks(subInfoBlockDto);
+            }
+            informationBlocksDto.add(informationBlockDto);
+        }
+        return informationBlocksDto;
     }
 }

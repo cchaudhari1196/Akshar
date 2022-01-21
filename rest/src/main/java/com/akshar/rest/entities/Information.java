@@ -13,6 +13,10 @@ public class Information {
     @Column
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_information_block_id")
+    private SubInformationBlock subInformationBlock;
+
     public Long getId() {
         return id;
     }
@@ -27,5 +31,13 @@ public class Information {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public SubInformationBlock getSubInformationBlock() {
+        return subInformationBlock;
+    }
+
+    public void setSubInformationBlock(SubInformationBlock subInformationBlock) {
+        this.subInformationBlock = subInformationBlock;
     }
 }

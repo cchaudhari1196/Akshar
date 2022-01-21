@@ -15,9 +15,15 @@ public class ImageGroup {
     @Column
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_group_id", referencedColumnName = "id", nullable = false)
-    private List<Image> images;
+    /*Commented is the unidirectional one to many realtionship.*/
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "image_group_id", referencedColumnName = "id", nullable = false)
+
+    /**
+     * For info- src\main\resources\WhatWeLearn\hiberanate.txt
+     */
+    @OneToMany(mappedBy = "imageGroup", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Image> images = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -43,9 +49,19 @@ public class ImageGroup {
         this.images = images;
     }
 
-    public void addImages(Image image) {
+    public void addImage(Image image) {
         if (this.images == null)
             this.images = new ArrayList<>();
         this.images.add(image);
+        if (image.getImageGroup() != this)
+            image.setImageGroup(this);
     }
+
+    public void removeImage(Image image) {
+        if (this.images == null)
+            return;
+        this.images.remove(image);
+        image.setImageGroup(null);
+    }
+
 }
