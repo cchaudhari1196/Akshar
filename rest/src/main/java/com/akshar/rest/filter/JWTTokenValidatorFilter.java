@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 
 public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 
-	
+
 	@Override
 	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -43,7 +43,10 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
 			catch (Exception e) {
-				throw new BadCredentialsException("Invalid Token received!");
+				response.reset();
+				response.setHeader("Exception", "Daya pata jagao gadbad kaha h");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "kuch to gadbad h daya...." + e.getMessage());
+				throw e;
 			}
 			
 		}

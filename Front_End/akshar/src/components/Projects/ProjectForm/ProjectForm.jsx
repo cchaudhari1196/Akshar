@@ -15,6 +15,7 @@ import ImageUpload from "./../../ImageCropper/imageUpload";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import addImageIcon from "../../../Assets/addImageIcon.png";
+import { createProject, uploadImage } from "./../../../services/projectService";
 
 class ProjectForm extends Form {
   static contextType = ThemeContext;
@@ -25,12 +26,11 @@ class ProjectForm extends Form {
 
   state = {
     data: {
-      id: -1,
       projectName: "",
       description: "",
       projectStatus: "",
+      owner: "",
       imageGroup: {
-        id: -1,
         name: "",
         images: [
           // {
@@ -43,16 +43,14 @@ class ProjectForm extends Form {
       },
       informationBlocks: [
         {
-          id: -1,
           // this title will be taken from sub information block
           title: "Information Block 1",
           // Only one subblock will be there for now.
           subInformationBlocks: [
             {
-              id: -1,
               title: "",
               subTitle: "",
-              informations: [{ id: -1, description: "" }],
+              informations: [{ description: "" }],
             },
           ],
         },
@@ -64,6 +62,7 @@ class ProjectForm extends Form {
   schema = {
     projectName: Joi.string(),
     description: Joi.string().required().label("description"),
+    owner: Joi.string().required().label("owner"),
     projectStatus: Joi.string().required().label("projectStatus"),
     imageGroup: Joi.object().keys({
       name: Joi.string().label("name"),
@@ -84,7 +83,19 @@ class ProjectForm extends Form {
   };
 
   doSubmit = async () => {
-    this.props.history.push("/project");
+    try {
+      const { data } = this.state;
+      await createProject(data);
+
+      const { state } = this.props.location;
+      window.location = state ? state.from.pathname : "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.username = ex.response.data;
+        this.setState({ errors });
+      }
+    }
   };
 
   onCropComplete = (croppedArea, croppedAreaPixels) => {
@@ -111,10 +122,28 @@ class ProjectForm extends Form {
     this.setState({ data });
   };
 
-  addImage = (address) => {
+  addImage = async (address) => {
+    let no = this.state.data.imageGroup.images.length;
+    const { url } = await this.uploadImage(
+      address,
+      this.state.data.projectName + no
+    );
+    console.log(url);
     let data = { ...this.state.data };
-    data.imageGroup.images.push({ address });
+    let name = "Nmae Of address";
+    data.imageGroup.name = "Name of Image group.";
+    data.imageGroup.images.push({ address, name });
     this.setState(data);
+  };
+
+  uploadImage = async (imageBlobUrl, imageName) => {
+    const formData = new FormData();
+    let blob = await fetch(imageBlobUrl).then((r) => r.blob());
+    var file = new File([blob], imageName ? imageName + ".png" : "s.png");
+    formData.append("file", file);
+
+    let res = await uploadImage(formData);
+    return res.data;
   };
 
   render() {
@@ -129,8 +158,11 @@ class ProjectForm extends Form {
           </p>
           <form onSubmit={this.handleSubmit}>
             <Row>
-              <Col xs={12} md={12}>
+              <Col xs={6} md={6}>
                 {this.renderInput("projectName", "Project Name")}
+              </Col>
+              <Col xs={6} md={6}>
+                {this.renderInput("owner", "Owner")}
               </Col>
             </Row>
             <Row style={{ justifyContent: "center", paddingBottom: "35px" }}>

@@ -39,9 +39,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    /*This method will have logic for which endpoint to secure*/
+    /*This method will have logic for securing endpoint*/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
                 cors().configurationSource(new CorsConfigurationSource() {
                     @Override
@@ -67,7 +68,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").authenticated()
                 .antMatchers("/contactUs").permitAll()
                 /*Requests that are not register here will be validated by JWT*/
-                .and().httpBasic();
-
+                .and().httpBasic()
+                /*This will add entrypoint(AuthenticationEntryPointConfig bean) and commence method will handle exception while authentication process.*/
+                .authenticationEntryPoint(entryPoint);
     }
 }

@@ -30,6 +30,10 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     public void createProject(final ProjectDto projectDto){
         Project project = projectDto.createEntity();
+        ImageGroup ig = projectDto.getImageGroup().createImageGroup();
+        List<InformationBlock> informationBlocks = projectDto.createInformationBlock();
+        project.setInformationBlocks(informationBlocks);
+        project.setImageGroup(ig);
         projectRepository.save(project);
     }
 
