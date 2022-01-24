@@ -1,6 +1,7 @@
 package com.akshar.rest.service;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,8 +32,12 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     public void save(MultipartFile file) throws FileUploadException {
         try {
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        } catch (IOException e) {
-            throw new FileUploadException("Could not store the file. Error: " + e.getMessage());
+        }
+        catch (FileAlreadyExistsException e){
+            throw new FileUploadException("File " + e.getLocalizedMessage() + " already exists...!");
+        }
+        catch (IOException e) {
+            throw new FileUploadException(e.getLocalizedMessage());
         }
     }
 

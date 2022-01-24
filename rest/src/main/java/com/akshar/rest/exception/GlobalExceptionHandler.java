@@ -20,12 +20,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<String> handleMaxSizeException(MaxUploadSizeExceededException exc) {
-        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("File too large!");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File too large!");
     }
 
     @ExceptionHandler(FileUploadException.class)
     public ResponseEntity<String> handleImageUploadFailed(FileUploadException exc) {
         String message = "Could not upload the file: " +exc.getMessage();
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
 }

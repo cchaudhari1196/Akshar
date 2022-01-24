@@ -46,7 +46,7 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 				response.reset();
 				response.setHeader("Exception", "Daya pata jagao gadbad kaha h");
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "kuch to gadbad h daya...." + e.getMessage());
-				throw e;
+				return;
 			}
 			
 		}
