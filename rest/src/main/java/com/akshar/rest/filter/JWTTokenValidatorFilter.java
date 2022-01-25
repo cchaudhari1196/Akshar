@@ -43,7 +43,6 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
 			catch (Exception e) {
-				response.reset();
 				response.setHeader("Exception", "Daya pata jagao gadbad kaha h");
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "kuch to gadbad h daya...." + e.getMessage());
 				return;

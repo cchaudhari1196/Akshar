@@ -9,8 +9,10 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InformationBlockForm from "./InformationBlock";
 import { ThemeContext } from "./../../../contexts/ThemeContext";
+import { UserContext } from "./../../../contexts/UserContext";
 import Cropper from "react-easy-crop";
 import ImageUpload from "./../../ImageCropper/imageUpload";
+import { toast } from "react-toastify";
 
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -21,7 +23,7 @@ class ProjectForm extends Form {
   static contextType = ThemeContext;
 
   componentDidMount() {
-    this.setState({ theme: this.theme });
+    this.setState({ theme: this.context });
   }
 
   state = {
@@ -122,24 +124,25 @@ class ProjectForm extends Form {
     this.setState({ data });
   };
 
-  addImage = async (address) => {
-    let no = this.state.data.imageGroup.images.length;
-    const { url } = await this.uploadImage(
-      address,
-      this.state.data.projectName + no
-    );
-    console.log(url);
+  addImage = async (address, name) => {
+    try {
+      var { url } = await this.uploadImage(address, name);
+    } catch (ex) {
+      if (ex.response) {
+        toast.error(ex.response.data);
+        return;
+      }
+    }
     let data = { ...this.state.data };
-    let name = "Nmae Of address";
-    data.imageGroup.name = "Name of Image group.";
-    data.imageGroup.images.push({ address, name });
+    data.imageGroup.name = data.projectName + " Image group.";
+    data.imageGroup.images.push({ address: url, name });
     this.setState(data);
   };
 
   uploadImage = async (imageBlobUrl, imageName) => {
     const formData = new FormData();
     let blob = await fetch(imageBlobUrl).then((r) => r.blob());
-    var file = new File([blob], imageName ? imageName + ".png" : "s.png");
+    var file = new File([blob], imageName);
     formData.append("file", file);
 
     let res = await uploadImage(formData);
@@ -273,35 +276,5 @@ class ProjectForm extends Form {
     );
   }
 }
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-];
 
 export default ProjectForm;

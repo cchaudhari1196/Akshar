@@ -16,6 +16,7 @@ import addImageIcon from "./../../Assets/addImageIcon.png";
 const ImageUpload = ({ add }) => {
   const [blob, setBlob] = useState(null);
   const [inputImg, setInputImg] = useState("");
+  const [imgName, setImgName] = useState("");
 
   const getBlob = (blob) => {
     // pass blob up from the ImageCropper component
@@ -25,6 +26,7 @@ const ImageUpload = ({ add }) => {
   const onInputChange = (e) => {
     const file = e.target.files[0];
     setInputImg(URL.createObjectURL(file));
+    setImgName(file.name);
   };
 
   const closeModal = () => {
@@ -37,24 +39,12 @@ const ImageUpload = ({ add }) => {
   };
 
   const addImage = (image) => {
-    add(image);
+    add(image, imgName);
     closeModal();
   };
 
   return (
     <React.Fragment>
-      {/* <div className="image-thumbnail image-upload-button-container">
-        <div className="image-upload-button-container image-upload-button-view-full image-thumbnail">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={onInputChange}
-            onClick={handleClick}
-            className="image-upload-button"
-          />
-        </div>
-        <span>+</span>
-      </div> */}
       <div>
         <input
           type="file"

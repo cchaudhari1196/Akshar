@@ -1,4 +1,5 @@
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
 axios.interceptors.response.use(null, (error) => {
@@ -8,9 +9,14 @@ axios.interceptors.response.use(null, (error) => {
     error.response.status < 500;
 
   if (!expectedError) {
-    toast.error("An unexpected error occurrred.");
+    toast.error("An unexpected error occurrred." + error.response.data.message);
   }
 
+  if (error.response && error.response.status == 401) {
+    toast.error(
+      "Login Failed. Please Login again " + error.response.data.message
+    );
+  }
   return Promise.reject(error);
 });
 
