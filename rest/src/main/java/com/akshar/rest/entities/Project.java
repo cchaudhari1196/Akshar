@@ -24,6 +24,9 @@ public class Project {
     @Column
     private String projectStatus;
 
+    @Column
+    private String highlightImage;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_group_id")
     private ImageGroup imageGroup;
@@ -94,5 +97,13 @@ public class Project {
             this.informationBlocks = new ArrayList<>();
         this.informationBlocks.add(informationBlock);
         informationBlock.setProject(this);
+    }
+
+    public String getHighlightImage() {
+        return highlightImage;
+    }
+
+    public void setHighlightImage(String highlightImage) {
+        this.highlightImage = highlightImage;
     }
 }

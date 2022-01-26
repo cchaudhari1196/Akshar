@@ -54,4 +54,10 @@ public class FilesController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
                 .contentType(MediaType.IMAGE_PNG).body(file);
     }
+
+    @DeleteMapping("/files/{filename:.+}")
+    public ResponseEntity<String> deleteFile(@PathVariable String filename) {
+        storageService.delete(filename);
+        return new ResponseEntity<String>("Successfully Deleted image", HttpStatus.OK);
+    }
 }

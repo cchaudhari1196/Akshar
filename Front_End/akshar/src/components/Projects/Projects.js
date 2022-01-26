@@ -1,21 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { ThemeContext } from "../../contexts/ThemeContext";
-import { projectsData } from "../../Assets/data/projectsData";
-import "./Projects.css";
-import SingleProject from "./SingleProject/SingleProject";
-
 import { Grid } from "@material-ui/core";
-
 import { Container } from "react-bootstrap";
-import Particle from "../Particle";
+
+import "./Projects.css";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import SingleProject from "./SingleProject/SingleProject";
+import { getAllProject } from "../../services/projectService";
 
 function Projects() {
   const [search, setSearch] = useState("");
   const { theme } = useContext(ThemeContext);
+  const [projects, setProjects] = useState([]);
 
-  const filteredArticles = projectsData.filter((project) => {
+  const filteredProjects = projects.filter((project) => {
     const content = project.projectName + project.projectDesc + project.tags;
     return content.toLowerCase().includes(search.toLowerCase());
   });
@@ -71,12 +69,17 @@ function Projects() {
 
   const classes = useStyles();
 
+  useEffect(async () => {
+    const { data } = await getAllProject();
+    setProjects(data);
+  }, []);
+
   return (
     <div className="projectPage" style={{ backgroundColor: theme.secondary }}>
       <Container fluid className="project-section">
         <Container>
           <h1 className="project-heading">
-            Our Recent <strong className="purple">Works </strong>
+            Our Recent <strong className="purple">Works</strong>
           </h1>
           <p style={{ color: "white" }}>
             Here are a few projects We've worked on recently.
@@ -99,7 +102,7 @@ function Projects() {
                 alignItems="center"
                 justifyContent="center"
               >
-                {filteredArticles.map((project) => (
+                {filteredProjects.map((project) => (
                   <SingleProject
                     theme={theme}
                     key={project.id}
@@ -107,9 +110,9 @@ function Projects() {
                     name={project.projectName}
                     desc={project.projectDesc}
                     owner={project.owner}
-                    code={project.code}
-                    demo={project.demo}
-                    image={project.image[0].url}
+                    code={project.ownerDetailsLink}
+                    demo=""
+                    image={project.image}
                   />
                 ))}
               </Grid>

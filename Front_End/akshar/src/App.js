@@ -81,8 +81,11 @@ class App extends React.Component {
       return adminRoutes;
     }
     if (user.authorities.includes("ADMIN")) {
+      // adminRoutes.push(
+      //   <Route path="/projectForm" key="1" component={ProjectForm} />
+      // );
       adminRoutes.push(
-        <Route path="/projectForm" key="1" component={ProjectForm} />
+        <Route path="/projectForm/:id" key="1" component={ProjectForm} />
       );
     }
     return adminRoutes;

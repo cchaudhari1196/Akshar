@@ -1,11 +1,15 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { FaPlay, FaCode } from "react-icons/fa";
-import Fade from "react-reveal/Fade";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { FaEdit, FaCode } from "react-icons/fa";
+import Fade from "react-reveal/Fade";
+
 import "./SingleProject.css";
+import { UserContext } from "./../../../contexts/UserContext";
 
 function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
+  const user = useContext(UserContext);
+
   const useStyles = makeStyles((t) => ({
     iconBtn: {
       display: "flex",
@@ -34,6 +38,7 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
   const classes = useStyles();
   const history = useHistory();
 
+  console.log(user);
   return (
     <Fade bottom>
       <div
@@ -47,14 +52,17 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
           <h2 style={{ color: theme.tertiary }}>{name}</h2>
           <img src={image} alt={name} />
           <div className="project--showcaseBtn">
-            <a
-              href={demo}
-              target="_blank"
-              rel="noreferrer"
-              className={classes.iconBtn}
-            >
-              <FaPlay className={classes.icon} />
-            </a>
+            {user.authorities.includes("ADMIN") && (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  history.push(`/projectForm/${id}`);
+                }}
+                className={classes.iconBtn}
+              >
+                <FaEdit className={classes.icon} />
+              </div>
+            )}
             <a
               href={code}
               target="_blank"
@@ -75,9 +83,7 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
           className="project--lang"
           style={{ background: theme.secondary, color: theme.tertiary80 }}
         >
-          {owner.map((tag, id) => (
-            <span key={id}>{tag}</span>
-          ))}
+          <span>{owner}</span>
         </div>
       </div>
     </Fade>

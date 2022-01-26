@@ -1,23 +1,29 @@
 import React, { Component } from "react";
-import Joi from "joi-browser";
-import Form from "../../common/form";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import Joi from "joi-browser";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import InformationBlockForm from "./InformationBlock";
-import { ThemeContext } from "./../../../contexts/ThemeContext";
-import { UserContext } from "./../../../contexts/UserContext";
 import Cropper from "react-easy-crop";
-import ImageUpload from "./../../ImageCropper/imageUpload";
 import { toast } from "react-toastify";
-
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+
 import addImageIcon from "../../../Assets/addImageIcon.png";
-import { createProject, uploadImage } from "./../../../services/projectService";
+import ImageUpload from "./../../ImageCropper/imageUpload";
+import InformationBlockForm from "./InformationBlock";
+import Form from "../../common/form";
+import { ThemeContext } from "./../../../contexts/ThemeContext";
+import { styles } from "./ImageHoverEffect.css";
+import {
+  createProject,
+  updateProject,
+  uploadImage,
+  deleteImage,
+  getProject,
+} from "./../../../services/projectService";
 
 class ProjectForm extends Form {
   static contextType = ThemeContext;
@@ -59,7 +65,21 @@ class ProjectForm extends Form {
       ],
     },
     errors: {},
+    isUpdate: false,
+    theme: {},
   };
+
+  async componentDidMount() {
+    await this.populateProject();
+  }
+
+  async populateProject() {
+    const id = this.props.match.params.id;
+    if (id) {
+      const { data } = await getProject(id);
+      this.setState({ data, isUpdate: true });
+    }
+  }
 
   schema = {
     projectName: Joi.string(),
@@ -87,7 +107,11 @@ class ProjectForm extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      await createProject(data);
+      if (this.state.isUpdate == true) {
+        await updateProject(data);
+      } else {
+        await createProject(data);
+      }
 
       const { state } = this.props.location;
       window.location = state ? state.from.pathname : "/";
@@ -149,6 +173,16 @@ class ProjectForm extends Form {
     return res.data;
   };
 
+  async deleteAndRemoveImage(url) {
+    let data = { ...this.state.data };
+    const imgs = data.imageGroup.images.filter((img) => {
+      return img.address != url;
+    });
+    data.imageGroup.images = imgs;
+    this.setState({ data });
+    deleteImage(url);
+  }
+
   render() {
     return (
       <Container fluid className="project-section">
@@ -188,30 +222,32 @@ class ProjectForm extends Form {
 
             <Row style={{ justifyContent: "left", paddingBottom: "35px" }}>
               <Col md="12">
-                {this.state.data.informationBlocks.map((infoBlock, index) => {
-                  return (
-                    <Accordion style={this.style.accordionBox} key={index}>
-                      <AccordionSummary
-                        expandIcon={
-                          <ExpandMoreIcon style={this.style.headerInDark} />
-                        }
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography className="project-sub-heading">
-                          {infoBlock.title}
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <InformationBlockForm
-                          index={index}
-                          data={infoBlock.subInformationBlocks[0]}
-                          populate={this.updateInformationBlock}
-                        ></InformationBlockForm>
-                      </AccordionDetails>
-                    </Accordion>
-                  );
-                })}
+                {this.state.data.informationBlocks[0].subInformationBlocks.map(
+                  (infoBlock, index) => {
+                    return (
+                      <Accordion style={this.style.accordionBox} key={index}>
+                        <AccordionSummary
+                          expandIcon={
+                            <ExpandMoreIcon style={this.style.headerInDark} />
+                          }
+                          aria-controls="panel1a-content"
+                          id="panel1a-header"
+                        >
+                          <Typography className="project-sub-heading">
+                            {infoBlock.title}
+                          </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <InformationBlockForm
+                            index={index}
+                            data={infoBlock}
+                            populate={this.updateInformationBlock}
+                          ></InformationBlockForm>
+                        </AccordionDetails>
+                      </Accordion>
+                    );
+                  }
+                )}
               </Col>
             </Row>
             <Row style={{ textAlign: "right", paddingBottom: "35px" }}>
@@ -238,13 +274,26 @@ class ProjectForm extends Form {
                 rowHeight={164}
               >
                 {this.state.data.imageGroup.images.map((item) => (
-                  <ImageListItem key={item.img}>
+                  <ImageListItem key={item.address} className="imgContainer">
                     <img
                       src={item.address}
-                      // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                      className="img"
                       alt={item.title}
                       loading="lazy"
                     />
+                    <div class="middle">
+                      {/* <div
+                        class="text"
+                      >
+                        Delete
+                      </div> */}
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => this.deleteAndRemoveImage(item.address)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </ImageListItem>
                 ))}
                 <ImageListItem>

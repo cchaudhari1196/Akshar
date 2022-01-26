@@ -640,7 +640,7 @@ html {
   }
 }
 .resume .resume-title {
-  font-size: 2em;
+  /* font-size: 2em; */
   font-weight: 700;
   padding-top: 30px;
   padding-bottom: 30px;

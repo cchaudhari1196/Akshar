@@ -23,8 +23,7 @@ function ControlledCarousel({ data }) {
     <Carousel activeIndex={index} onSelect={handleSelect} interval={2000}>
       {data.map((item, index) => (
         <Carousel.Item key={index}>
-          <img className="d-block w-100" src={item.url} alt="{item.name}" />
-          {/* {PictureSizer(item.url)} */}
+          <img className="d-block w-100" src={item.address} alt="{item.name}" />
           <Carousel.Caption>
             <h3>{item.header}</h3>
             <p>{item.subHeader}</p>
