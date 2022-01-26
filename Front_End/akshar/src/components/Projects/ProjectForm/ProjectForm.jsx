@@ -131,19 +131,13 @@ class ProjectForm extends Form {
   updateInformationBlock = (informationBlock, index = -1) => {
     const data = { ...this.state.data };
     if (index == -1) {
-      data.informationBlocks.push({
+      data.informationBlocks[0].subInformationBlocks.push({
         title: "Information Block " + (data.informationBlocks.length + 1),
-        subInformationBlocks: [
-          {
-            id: -1,
-            title: "",
-            subTitle: "",
-            informations: [{ description: "From Project Form " }],
-          },
-        ],
+        subTitle: "",
+        informations: [{ description: "From Project Form " }],
       });
     } else {
-      data.informationBlocks[index].subInformationBlocks[0] = informationBlock;
+      data.informationBlocks[0].subInformationBlocks[index] = informationBlock;
     }
     this.setState({ data });
   };
@@ -281,7 +275,7 @@ class ProjectForm extends Form {
                       alt={item.title}
                       loading="lazy"
                     />
-                    <div class="middle">
+                    <div className="middle">
                       {/* <div
                         class="text"
                       >
