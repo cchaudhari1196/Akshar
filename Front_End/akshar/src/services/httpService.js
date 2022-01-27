@@ -8,14 +8,18 @@ axios.interceptors.response.use(null, (error) => {
     error.response.status >= 400 &&
     error.response.status < 500;
 
+  try {
+    var msg = error.response.data.message;
+  } catch (e) {
+    console.log("Mesage not found");
+  }
+
   if (!expectedError) {
-    toast.error("An unexpected error occurrred." + error.response.data.message);
+    toast.error("An unexpected error occurrred." + msg);
   }
 
   if (error.response && error.response.status == 401) {
-    toast.error(
-      "Login Failed. Please Login again " + error.response.data.message
-    );
+    toast.error("Login Failed. Please Login again " + msg);
   }
   return Promise.reject(error);
 });

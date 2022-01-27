@@ -4,6 +4,7 @@ import com.akshar.rest.constants.SecurityConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,7 +55,9 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) {
-	  return request.getServletPath().equals("/login");
+	  Boolean shouldSkip = request.getServletPath().equals("/login") ||
+			  (request.getServletPath().contains("/project") && request.getMethod().equals(HttpMethod.GET.name()));
+	  return shouldSkip;
 	}
 	 
 	

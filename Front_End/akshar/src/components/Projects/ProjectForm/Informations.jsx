@@ -43,6 +43,16 @@ class Informations extends Component {
     this.props.updateParent(data, this.props.index);
   };
 
+  addInfo = (event) => {
+    event.preventDefault();
+    this.props.add(this.props.index);
+  };
+
+  removeInfo = (event) => {
+    event.preventDefault();
+    this.props.remove(this.props.index);
+  };
+
   render() {
     return (
       <Container>
@@ -57,18 +67,12 @@ class Informations extends Component {
             />
           </Col>
           <Col md="1">
-            <button
-              className="btn btn-primary"
-              onClick={() => this.props.add(this.props.index)}
-            >
+            <button className="btn btn-primary" onClick={this.addInfo}>
               <FaPlus style={{ marginBottom: "2px" }} />
             </button>
           </Col>
           <Col md="1">
-            <button
-              className="btn btn-primary"
-              onClick={() => this.props.remove(this.props.index)}
-            >
+            <button className="btn btn-primary" onClick={this.removeInfo}>
               <FaTimes style={{ marginBottom: "2px" }} />
             </button>
           </Col>
