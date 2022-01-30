@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import getCroppedImg from "./cropImage";
 import { styles } from "./style";
+import ImageForm from "./ImageForm";
 
 const ImageCropper = ({ inputImg, close, add }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -13,6 +14,10 @@ const ImageCropper = ({ inputImg, close, add }) => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
+  const [imageDetails, setImageDetails] = useState({
+    name: "",
+    description: "",
+  });
 
   const style = {
     imgContainer: {
@@ -34,7 +39,17 @@ const ImageCropper = ({ inputImg, close, add }) => {
   }, []);
 
   const addImage = () => {
-    add(croppedImage);
+    console.log(imageDetails);
+    console.log(imageDetails.description);
+    add({
+      image: croppedImage,
+      description: imageDetails["description"],
+      name: imageDetails["name"],
+    });
+  };
+
+  const populateImageDetails = ({ imageDetails }) => {
+    setImageDetails(imageDetails);
   };
 
   const showCroppedImage = useCallback(async () => {
@@ -75,9 +90,12 @@ const ImageCropper = ({ inputImg, close, add }) => {
           </div>
         )}
         {croppedImage && (
-          <div style={style.imgContainer}>
-            <img src={croppedImage} alt="Cropped" style={style.img} />
-          </div>
+          <React.Fragment>
+            <div style={style.imgContainer}>
+              <img src={croppedImage} alt="Cropped" style={style.img} />
+            </div>
+            <ImageForm populateImageDetails={populateImageDetails}></ImageForm>
+          </React.Fragment>
         )}
       </Modal.Body>
       <Modal.Footer>

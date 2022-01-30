@@ -25,7 +25,7 @@ function ControlledCarousel({ data }) {
         <Carousel.Item key={index}>
           <img className="d-block w-100" src={item.address} alt="{item.name}" />
           <Carousel.Caption>
-            <h3>{item.header}</h3>
+            <h3>{item.description}</h3>
             <p>{item.subHeader}</p>
           </Carousel.Caption>
         </Carousel.Item>

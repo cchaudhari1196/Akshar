@@ -745,3 +745,11 @@ html {
 .fork-btn-inner::after {
   display: none !important;
 }
+
+.modal-content {
+  background-color: #3a383d !important;
+}
+
+.modal-header {
+  color: white;
+}

@@ -10,6 +10,10 @@ import Cropper from "react-easy-crop";
 import { toast } from "react-toastify";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DownloadIcon from "@mui/icons-material/Download";
+import { ImageListItemBar } from "@material-ui/core";
 
 import addImageIcon from "../../../Assets/addImageIcon.png";
 import ImageUpload from "./../../ImageCropper/imageUpload";
@@ -24,6 +28,8 @@ import {
   deleteImage,
   getProject,
 } from "./../../../services/projectService";
+import { FaTrash } from "react-icons/fa";
+import ImageCropper from "../../ImageCropper/imageCropper";
 
 class ProjectForm extends Form {
   static contextType = ThemeContext;
@@ -142,9 +148,9 @@ class ProjectForm extends Form {
     this.setState({ data });
   };
 
-  addImage = async (address, name) => {
+  addImage = async ({ image, name, description }) => {
     try {
-      var { url } = await this.uploadImage(address, name);
+      var { url } = await this.uploadImage(image, name);
     } catch (ex) {
       if (ex.response) {
         toast.error(ex.response.data);
@@ -153,7 +159,7 @@ class ProjectForm extends Form {
     }
     let data = { ...this.state.data };
     data.imageGroup.name = data.projectName + " Image group.";
-    data.imageGroup.images.push({ address: url, name });
+    data.imageGroup.images.push({ address: url, name, description });
     this.setState(data);
   };
 
@@ -275,19 +281,38 @@ class ProjectForm extends Form {
                       alt={item.title}
                       loading="lazy"
                     />
-                    <div className="middle">
-                      {/* <div
-                        class="text"
-                      >
-                        Delete
-                      </div> */}
+                    {/* <div className="middle">
                       <button
                         className="btn btn-primary"
                         onClick={() => this.deleteAndRemoveImage(item.address)}
                       >
                         Delete
                       </button>
-                    </div>
+                      </div> */}
+
+                    <ImageListItemBar
+                      title={item.name}
+                      subtitle={item.description}
+                      actionIcon={
+                        <React.Fragment>
+                          <IconButton
+                            sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                            aria-label={`info about ${item.description}`}
+                          >
+                            <DownloadIcon></DownloadIcon>
+                          </IconButton>
+                          <IconButton
+                            sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                            aria-label={`info about ${item.description}`}
+                            onClick={() =>
+                              this.deleteAndRemoveImage(item.address)
+                            }
+                          >
+                            <DeleteIcon></DeleteIcon>
+                          </IconButton>
+                        </React.Fragment>
+                      }
+                    />
                   </ImageListItem>
                 ))}
                 <ImageListItem>

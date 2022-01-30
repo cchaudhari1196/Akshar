@@ -6,12 +6,10 @@ import "./uploader.css";
 
 const ImageUpload = ({ add }) => {
   const [inputImg, setInputImg] = useState("");
-  const [imgName, setImgName] = useState("");
 
   const onInputChange = (e) => {
     const file = e.target.files[0];
     setInputImg(URL.createObjectURL(file));
-    setImgName(file.name);
   };
 
   const closeModal = () => {
@@ -23,8 +21,8 @@ const ImageUpload = ({ add }) => {
     target.value = "";
   };
 
-  const addImage = (image) => {
-    add(image, imgName);
+  const addImage = ({ image, description, name }) => {
+    add({ image, name, description });
     closeModal();
   };
 
