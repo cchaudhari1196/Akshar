@@ -13,6 +13,7 @@ public class ProjectDto {
     private String projectStatus;
     private ImageGroupDto imageGroup;
     private List<InformationBlockDto> informationBlocks;
+    private List<ReviewDto> reviews;
 
     public Long getId() {
         return id;
@@ -70,6 +71,14 @@ public class ProjectDto {
         this.informationBlocks = informationBlocks;
     }
 
+    public List<ReviewDto> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewDto> reviews) {
+        this.reviews = reviews;
+    }
+
     public Project createEntity(){
         Project project = new Project();
         project.setId(this.id);
@@ -114,6 +123,14 @@ public class ProjectDto {
         return informationBlocks;
     }
 
+    public List<Review> createReview(){
+        List<Review> reviewList = new ArrayList<>();
+        for(ReviewDto reviewDto : this.reviews){
+            reviewList.add(reviewDto.createEntity());
+        }
+        return reviewList;
+    }
+
     public static ProjectDto createModel(Project project){
         ProjectDto dto = new ProjectDto();
         dto.setDescription(project.getDescription());
@@ -137,8 +154,17 @@ public class ProjectDto {
             dto.setImageGroup(imageGroupDto);
         }
 
+        dto.setReviews(createReviewDto(project));
         dto.setInformationBlocks(createInformationBlockDto(project));
         return dto;
+    }
+
+    private static List<ReviewDto> createReviewDto(Project project){
+        List<ReviewDto> reviewDtoList = new ArrayList<>();
+        for(Review review: project.getReviews()){
+            reviewDtoList.add(ReviewDto.createModel(review));
+        }
+        return reviewDtoList;
     }
 
     private static List<InformationBlockDto> createInformationBlockDto(Project project){

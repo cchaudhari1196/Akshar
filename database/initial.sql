@@ -265,6 +265,25 @@ CREATE TABLE IF NOT EXISTS `akshar`.`project` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `akshar`.`review`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `akshar`.`review` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `reviewer` VARCHAR(45) NOT NULL,
+  `review` VARCHAR(1000) NULL,
+  `image_url` VARCHAR(450) CHARACTER SET 'ascii' NULL,
+  `project_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_review_project1_idx` (`project_id` ASC) VISIBLE,
+  CONSTRAINT `fk_review_project1`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `akshar`.`project` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -36,6 +36,7 @@ public class ProjectServiceImpl implements ProjectService{
         List<InformationBlock> informationBlocks = projectDto.createInformationBlock();
         project.setInformationBlocks(informationBlocks);
         project.setImageGroup(ig);
+        project.setReviews(projectDto.createReview());
         projectRepository.save(project);
     }
 
@@ -59,6 +60,8 @@ public class ProjectServiceImpl implements ProjectService{
 
         List<InformationBlock> informationBlocks = projectDto.createInformationBlock();
         project.setInformationBlocks(informationBlocks);
+
+        project.setReviews(projectDto.createReview());
 
         projectRepository.save(project);
     }

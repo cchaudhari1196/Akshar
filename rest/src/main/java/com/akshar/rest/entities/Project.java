@@ -1,5 +1,7 @@
 package com.akshar.rest.entities;
 
+import com.akshar.rest.model.ReviewDto;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,9 @@ public class Project {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project", orphanRemoval = true)
     private List<InformationBlock> informationBlocks;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project",orphanRemoval = true)
+    private List<Review> reviews;
 
     public Long getId() {
         return id;
@@ -84,6 +89,16 @@ public class Project {
         }
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        for(Review review :reviews){
+            this.addReview(review);
+        }
+    }
+
     public ImageGroup getImageGroup() {
         return imageGroup;
     }
@@ -97,6 +112,20 @@ public class Project {
             this.informationBlocks = new ArrayList<>();
         this.informationBlocks.add(informationBlock);
         informationBlock.setProject(this);
+    }
+
+    public void addReview(Review review){
+        if(this.reviews == null)
+            this.reviews = new ArrayList<>();
+        this.reviews.add(review);
+        review.setProject(this);
+    }
+
+    public void removeReview(Review review){
+        if(review == null)
+            return;
+        reviews.remove(review);
+        review.setProject(null);
     }
 
     public String getHighlightImage() {
