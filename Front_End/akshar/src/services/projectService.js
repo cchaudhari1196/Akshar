@@ -1,27 +1,30 @@
 import http from "./httpService";
-import authService from "./authService";
 import { apiUrl } from "./../config.json";
 
-const createProjectUrl = apiUrl + "project";
-const getProjectUrl = apiUrl + "project/";
+const projectUrl = apiUrl + "project";
+const projectUrlWithSlash = apiUrl + "project/";
 const uploadImageUrl = apiUrl + "upload";
 
 export function createProject(data) {
-  return http.post(createProjectUrl, data);
+  return http.post(projectUrl, data);
 }
 
 export function updateProject(data) {
-  return http.patch(createProjectUrl, data);
+  return http.patch(projectUrl, data);
 }
 
 export function getProject(id) {
-  var url = getProjectUrl + id;
+  var url = projectUrlWithSlash + id;
   return http.get(url);
 }
 
 export function getAllProject() {
-  var url = createProjectUrl;
+  var url = projectUrl;
   return http.get(url);
+}
+
+export function deleteProject(id) {
+  return http.delete(projectUrlWithSlash + id);
 }
 
 export function uploadImage(data) {

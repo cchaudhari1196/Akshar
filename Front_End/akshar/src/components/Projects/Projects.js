@@ -6,7 +6,8 @@ import { Container } from "react-bootstrap";
 import "./Projects.css";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import SingleProject from "./SingleProject/SingleProject";
-import { getAllProject } from "../../services/projectService";
+import { getAllProject, deleteProject } from "../../services/projectService";
+import { toast } from "react-toastify";
 
 function Projects() {
   const [search, setSearch] = useState("");
@@ -74,6 +75,22 @@ function Projects() {
     setProjects(data);
   }, []);
 
+  const handleDelete = async (id) => {
+    console.log(id);
+    let originalProjects = projects;
+    const filteredProjects = projects.filter((e) => e.id != id);
+    setProjects(filteredProjects);
+
+    try {
+      await deleteProject(id);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        toast.error("This project has already been deleted.");
+
+      setProjects(originalProjects);
+    }
+  };
+
   return (
     <div className="projectPage" style={{ backgroundColor: theme.secondary }}>
       <Container fluid className="project-section">
@@ -113,6 +130,7 @@ function Projects() {
                     code={project.ownerDetailsLink}
                     demo=""
                     image={project.image}
+                    handleDelete={handleDelete}
                   />
                 ))}
               </Grid>

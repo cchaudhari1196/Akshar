@@ -1,13 +1,23 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { FaEdit, FaCode } from "react-icons/fa";
+import { FaEdit, FaTrash, FaCode, FaRegAddressCard } from "react-icons/fa";
 import Fade from "react-reveal/Fade";
 
 import "./SingleProject.css";
 import { UserContext } from "./../../../contexts/UserContext";
 
-function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
+function SingleProject({
+  id,
+  name,
+  desc,
+  owner,
+  code,
+  demo,
+  image,
+  theme,
+  handleDelete,
+}) {
   const user = useContext(UserContext);
 
   const useStyles = makeStyles((t) => ({
@@ -52,7 +62,7 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
           <h2 style={{ color: theme.tertiary }}>{name}</h2>
           <img src={image} alt={name} />
           <div className="project--showcaseBtn">
-            {user.authorities.includes("ADMIN") && (
+            {user && user.authorities.includes("ADMIN") ? (
               <div
                 onClick={(e) => {
                   e.stopPropagation();
@@ -62,15 +72,37 @@ function SingleProject({ id, name, desc, owner, code, demo, image, theme }) {
               >
                 <FaEdit className={classes.icon} />
               </div>
+            ) : (
+              <a
+                href={code}
+                target="_blank"
+                rel="noreferrer"
+                className={classes.iconBtn}
+              >
+                <FaCode className={classes.icon} />
+              </a>
             )}
-            <a
-              href={code}
-              target="_blank"
-              rel="noreferrer"
-              className={classes.iconBtn}
-            >
-              <FaCode className={classes.icon} />
-            </a>
+
+            {user && user.authorities.includes("ADMIN") ? (
+              <a
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(id);
+                }}
+                className={classes.iconBtn}
+              >
+                <FaTrash className={classes.icon} />
+              </a>
+            ) : (
+              <a
+                href={code}
+                target="_blank"
+                rel="noreferrer"
+                className={classes.iconBtn}
+              >
+                <FaRegAddressCard className={classes.icon} />
+              </a>
+            )}
           </div>
         </div>
         <p

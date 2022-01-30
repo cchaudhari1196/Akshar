@@ -59,7 +59,7 @@ const ImageCropper = ({ inputImg, close, add }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header>Crop you Image</Modal.Header>
+      <Modal.Header>Crop your Image</Modal.Header>
       <Modal.Body>
         {!croppedImage && (
           <div className="cropper" style={{ height: "55vh" }}>
