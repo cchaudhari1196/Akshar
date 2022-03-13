@@ -125,6 +125,8 @@ public class ProjectDto {
 
     public List<Review> createReview(){
         List<Review> reviewList = new ArrayList<>();
+        if(this.reviews == null || this.reviews.isEmpty())
+            return reviewList;
         for(ReviewDto reviewDto : this.reviews){
             reviewList.add(reviewDto.createEntity());
         }

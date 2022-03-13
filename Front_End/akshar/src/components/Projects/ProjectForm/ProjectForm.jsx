@@ -202,7 +202,7 @@ class ProjectForm extends Form {
                 {this.renderInput("owner", "Owner")}
               </Col>
             </Row>
-            <Row style={{ justifyContent: "center", paddingBottom: "35px" }}>
+            <Row className="my-row">
               <Col xs={12} md={6}>
                 {this.renderSelect("projectStatus", "Project Status", [
                   { _id: "In Progress", name: "In Progress" },

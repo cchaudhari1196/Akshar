@@ -12,6 +12,7 @@ public class Review {
     private String reviewer;
     private String review;
     private String imageUrl;
+    private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
@@ -55,6 +56,14 @@ public class Review {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

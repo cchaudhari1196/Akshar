@@ -20,6 +20,7 @@ import Profile from "./components/Profile/profile";
 import ProjectForm from "./components/Projects/ProjectForm/ProjectForm";
 import ProjectDetail from "./components/Projects/ProjectDetail/ProjectDetail";
 import UserContextProvider from "./contexts/UserContext";
+import ReviewForm from "./components/Projects/ProjectForm/reviewForm";
 
 class App extends React.Component {
   state = {
@@ -65,6 +66,7 @@ class App extends React.Component {
               <Route path="/login" component={Login} />
               <Route path="/logout" component={Logout} />
               <Route path="/profile" component={Profile} />
+              <Route path="/add-review" component={ReviewForm} />
               {this.getAdminRoutes(user).map((route) => route)}
             </Switch>
             <Footer />

@@ -2,7 +2,8 @@
 import girl1 from "../../Assets/svg/testimonials/girl1.svg";
 import girl2 from "../../Assets/svg/testimonials/girl2.svg";
 import girl3 from "../../Assets/svg/testimonials/girl3.svg";
-import boy1 from "../../Assets/svg/testimonials/boy1.svg";
+// import boy1 from "../../Assets/svg/testimonials/boy1.svg";
+import boy1 from "../../Assets/svg/testimonials/logo.png";
 import boy2 from "../../Assets/svg/testimonials/boy2.svg";
 import boy3 from "../../Assets/svg/testimonials/boy3.svg";
 

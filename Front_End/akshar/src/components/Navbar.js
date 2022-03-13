@@ -79,7 +79,7 @@ function NavBar({ user }) {
               </Nav.Link>
             </Nav.Item>
 
-            {!user && (
+            {/* {!user && (
               <Nav.Item>
                 <Nav.Link
                   as={Link}
@@ -90,7 +90,7 @@ function NavBar({ user }) {
                   <AiOutlineLogin style={{ marginBottom: "2px" }} /> Login
                 </Nav.Link>
               </Nav.Item>
-            )}
+            )} */}
             {user && (
               <React.Fragment>
                 <Nav.Item>

@@ -9,14 +9,14 @@ class Testimonial extends React.Component {
     return (
       <div>
         <Carousel interval={1500}>
-          {testimonialsData.map(({ id, title, text, image, name }) => (
+          {this.props.list.map(({ id, reviewer, review, imageUrl, title }) => (
             <Carousel.Item key={id}>
               <SingleTestimonial
                 id={id}
-                name={name}
+                name={reviewer}
                 title={title}
-                image={image}
-                text={text}
+                image={imageUrl}
+                text={review}
               ></SingleTestimonial>
             </Carousel.Item>
           ))}

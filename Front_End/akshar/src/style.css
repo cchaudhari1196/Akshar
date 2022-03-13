@@ -548,12 +548,17 @@ html {
 /* About */
 /* --------- */
 
-.about-section {
+.my-container {
   position: relative !important;
   padding-top: 150px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
   color: white !important;
+}
+
+.my-row {
+  justify-content: center;
+  padding-bottom: 35px;
 }
 
 .tech-icons {

@@ -30,6 +30,7 @@ class ProjectDetail extends React.Component {
           informations: [{ description: "" }],
         },
       ],
+      reviews: [{}],
     },
   };
 
@@ -47,6 +48,7 @@ class ProjectDetail extends React.Component {
       informationBlocks: project.informationBlocks
         ? project.informationBlocks[0].subInformationBlocks
         : [],
+      reviews: project.reviews ? project.reviews : [],
     };
   };
 
@@ -79,7 +81,7 @@ class ProjectDetail extends React.Component {
             </Col>
           </Row>
         </Container>
-        <Testimonial></Testimonial>
+        <Testimonial list={data.reviews}></Testimonial>
         <Container style={{ marginTop: "5%" }}>
           <h1 className="project-heading">
             <strong className="purple">Contact Us </strong>
@@ -93,78 +95,3 @@ class ProjectDetail extends React.Component {
 }
 
 export default ProjectDetail;
-
-// function ProjectDetail(props, id) {
-//   var [project, setProject] = useState();
-//   var [fullowner, setFullowner] = useState();
-
-//   React.useEffect(async () => {
-//     const { data: project } = await getProject(16);
-//     setProject(mapToViewModel(project));
-//   }, []);
-
-//   // const getProject = () => {
-//   //   project = projectsData.find((e) => {
-//   //     return e.id == props.match.params.id;
-//   //   });
-//   //   setProject(project);
-//   //   return project;
-//   // };
-
-//   const generateOwnerString = () => {
-//     project && project.owner.map((e) => setFullowner(fullowner + ", " + e));
-//   };
-
-//   const mapToViewModel = (project) => {
-//     return {
-//       id: project.id,
-//       projectName: project ? project.projectName : "",
-//       owner: project ? project.owner : "",
-//       images: project ? project.imageGroup.images : [],
-//     };
-//   };
-
-//   return (
-//     <Container fluid className="resume-section">
-//       <Particle />
-//       <Container>
-//         <h1 className="project-heading">
-//           <strong className="purple">{project.projectName}</strong>
-//         </h1>
-//         <p style={{ color: "white" }}>
-//           Its owned by {project ? project.owner : ""}
-//         </p>
-//         <ControlledCarousel
-//           data={project ? project.images : []}
-//         ></ControlledCarousel>
-//         <Row className="resume">
-//           <Col md={12} className="resume-left">
-//             <h3 className="resume-title">Owner</h3>
-//             <ProjectContentFormat title="Amdocs Development center" />
-
-//             <h3 className="resume-title">Highlights</h3>
-//             <ProjectContentFormat
-//               title="Installations"
-//               date="July 2021 - September 2021"
-//               content={[
-//                 "Installed 2 pool DP",
-//                 "Installed Generation plant for temp use",
-//                 "Installed Solar rooftop plant",
-//               ]}
-//             />
-//           </Col>
-//         </Row>
-//       </Container>
-//       <Testimonial></Testimonial>
-//       <Container style={{ marginTop: "5%" }}>
-//         <h1 className="project-heading">
-//           <strong className="purple">Contact Us </strong>
-//         </h1>
-//         <p style={{ color: "white" }}>Have a similar Project in Mind?</p>
-//       </Container>
-//       <Contacts></Contacts>
-//     </Container>
-//   );
-// }
-
-// export default ProjectDetail;
